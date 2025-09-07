@@ -4,6 +4,10 @@ import webRoutes from "./routes/web";
 const app = express();
 const port = process.env.PORT || 3000;
 
+// parse request to body
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // set view engine
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");

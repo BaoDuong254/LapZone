@@ -19,16 +19,6 @@ webRoutes(app);
 // config static files
 app.use(express.static("public"));
 
-// connect to database
-getConnection()
-  .then(() => {
-    console.log("Database connected");
-  })
-  .catch((err) => {
-    console.error("Database connection failed:", err);
-    process.exit(1);
-  });
-
 app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`);
 });

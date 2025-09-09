@@ -36,7 +36,7 @@
               <td><%= user.address %></td>
               <td>
                 <div style="display: flex; gap: 10px">
-                  <form action="/handle-view-user/<%= user.id %>" method="POST">
+                  <form action="/handle-view-user/<%= user.id %>" method="get">
                     <button class="btn btn-warning" type="submit">View</button>
                   </form>
                   <form action="/handle-delete-user/<%= user.id %>" method="POST" onsubmit="return confirm('Are you sure?')">

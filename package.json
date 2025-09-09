@@ -16,7 +16,7 @@
     "ignore": [
       "node_modules"
     ],
-    "exec": "ts-node ./src/app.ts"
+    "exec": "ts-node -r tsconfig-paths/register ./src/app.ts"
   },
   "keywords": [],
   "author": "",
@@ -32,6 +32,7 @@
     "mysql2": "^3.14.4",
     "nodemon": "^3.1.10",
     "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.9.2"
   }
 }

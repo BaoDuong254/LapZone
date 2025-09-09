@@ -1,4 +1,4 @@
-import getConnection from "../config/database";
+import getConnection from "src/config/database";
 
 const handleCreateUser = async (fullname: string, email: string, address: string) => {
   console.log(">>> Check data: ", fullname, email, address);

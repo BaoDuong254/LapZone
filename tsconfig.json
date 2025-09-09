@@ -40,6 +40,14 @@
     "moduleDetection": "force",
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "config/*": ["./src/app/_config/*"],
+      "controllers/*": ["./src/controllers/*"],
+      "models/*": ["./src/app/models/*"],
+      "routes/*": ["./src/routes/*"],
+      "services/*": ["./src/services/*"]
+    },
   }
 }

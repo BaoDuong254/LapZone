@@ -34,7 +34,16 @@
               <td><%= user.name %></td>
               <td><%= user.email %></td>
               <td><%= user.address %></td>
-              <td><button class="btn btn-danger">Delete</button></td>
+              <td>
+                <div style="display: flex; gap: 10px">
+                  <form action="/handle-view-user/<%= user.id %>" method="POST">
+                    <button class="btn btn-warning" type="submit">View</button>
+                  </form>
+                  <form action="/handle-delete-user/<%= user.id %>" method="POST" onsubmit="return confirm('Are you sure?')">
+                    <button class="btn btn-danger" type="submit">Delete</button>
+                  </form>
+                </div>
+              </td>
             </tr>
             <% }) %>
           </tbody>

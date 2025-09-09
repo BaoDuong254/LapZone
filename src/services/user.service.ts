@@ -1,24 +1,22 @@
-import getConnection from "config/database";
+
+import { prisma } from 'config/client';
+import getConnection from 'config/database';
 
 const handleCreateUser = async (fullname: string, email: string, address: string) => {
-  console.log(">>> Check data: ", fullname, email, address);
-  const connection = await getConnection();
-  try {
-    const sql = "INSERT INTO `users`(`name`, `email`, `address`) VALUES (?, ?, ?)";
-    const values = [fullname, email, address];
-    const [result, fields] = await connection.execute(sql, values);
-    return result;
-  } catch (err) {
-    console.log(err);
-    return [];
-  }
+  await prisma.user.create({
+    data: {
+      name: fullname,
+      email: email,
+      address: address
+    }
+  })
 };
 
 const getAllUsers = async () => {
   const connection = await getConnection();
   // A simple SELECT query
   try {
-    const [results, fields] = await connection.query("SELECT * FROM `users`");
+    const [results, fields] = await connection.query("SELECT * FROM `user`");
 
     console.log(results); // results contains rows returned by server
     console.log(fields); // fields contains extra meta data about results, if available
@@ -45,7 +43,7 @@ const handleDeleteUser = async (id?: string) => {
 const getUserByID = async (id?: string) => {
   try {
     const connection = await getConnection();
-    const sql = 'SELECT * FROM `users` WHERE `id` = ?';
+    const sql = "SELECT * FROM `users` WHERE `id` = ?";
     const values = [id];
     const [result, fields] = await connection.execute(sql, values);
     return (result as any[])[0];

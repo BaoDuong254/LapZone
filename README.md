@@ -24,7 +24,7 @@ model User {
 }
 ```
 
-## 🎯 Usage
+## Usage
 
 1. **View Users**: Navigate to the home page to see a list of all users
 2. **Create User**: Click "Create a new user" to add a new user

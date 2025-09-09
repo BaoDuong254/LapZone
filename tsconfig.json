@@ -2,7 +2,6 @@
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
     // File Layout
-    "baseUrl": ".",
     "rootDir": "./src",
     "outDir": "./dist",
 
@@ -42,10 +41,11 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
+    "baseUrl": ".",
     "paths": {
-      "config/*": ["./src/app/_config/*"],
+      "config/*": ["./src/config/*"],
       "controllers/*": ["./src/controllers/*"],
-      "models/*": ["./src/app/models/*"],
+      "models/*": ["./src/models/*"],
       "routes/*": ["./src/routes/*"],
       "services/*": ["./src/services/*"]
     },

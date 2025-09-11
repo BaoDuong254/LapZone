@@ -1,4 +1,4 @@
-import { getDashboardPage } from "controllers/admin/dashboard.controller";
+import { getAdminUserPage, getDashboardPage } from "controllers/admin/dashboard.controller";
 import {
   getCreateUser,
   getHomePage,
@@ -18,6 +18,7 @@ const webRoutes = (app: Express) => {
   router.get("/handle-view-user/:id", getViewUser);
   router.post("/handle-update-user/:id", postUpdateUser);
   router.get("/admin", getDashboardPage);
+  router.get("/admin/user", getAdminUserPage);
   app.use("/", router);
 };
 

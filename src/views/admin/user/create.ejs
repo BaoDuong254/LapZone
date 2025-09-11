@@ -25,16 +25,36 @@
             </ol>
             <div>
               <div style="width: 600px; margin: auto">
-                <h3 style="padding: 10px 0">Create a User</h3>
+                <h3 style="padding: 10px 0">Create a user</h3>
                 <form action="/handle-create-user" method="POST">
                   <div class="mb-3">
-                    <label class="form-label">Name</label>
+                    <label class="form-label">Full name</label>
                     <input type="text" class="form-control" placeholder="Your name" name="fullname" />
                   </div>
                   <div class="mb-3">
                     <label class="form-label">Email</label>
-                    <input type="email" class="form-control" placeholder="name@example.com" name="email" />
+                    <input type="email" class="form-control" placeholder="name@example.com" name="username" />
                   </div>
+                  <div class="row">
+                    <div class="mb-3 col-6">
+                      <label class="form-label">Phone</label>
+                      <input type="text" class="form-control" name="phone" />
+                    </div>
+                    <div class="mb-3 col-6">
+                      <label class="form-label">Role</label>
+                      <select class="form-select">
+                        <% roles.forEach((role,index) => { %>
+                        <option value="<%-role.id %>"><%- role.name %></option>
+                        <%})%>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label">Avatar</label>
+                    <input class="form-control" type="file" id="formFile" />
+                  </div>
+
                   <div class="mb-3">
                     <label class="form-label">Address</label>
                     <textarea class="form-control" rows="2" name="address"></textarea>

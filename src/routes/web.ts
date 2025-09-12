@@ -13,11 +13,11 @@ import {
   postUpdateUser,
 } from "controllers/user.controller";
 import express, { Express } from "express";
+import fileUploadMiddleware from "src/middlewares/multer";
 const router = express.Router();
 
 const webRoutes = (app: Express) => {
   router.get("/", getHomePage);
-  router.post("/handle-create-user", postCreateUser);
   router.post("/handle-delete-user/:id", postDeleteUser);
   router.get("/handle-view-user/:id", getViewUser);
   router.post("/handle-update-user/:id", postUpdateUser);
@@ -26,6 +26,7 @@ const webRoutes = (app: Express) => {
   router.get("/admin", getDashboardPage);
   router.get("/admin/user", getAdminUserPage);
   router.get("/admin/create-user", getCreateUser);
+  router.post("/admin/handle-create-user", fileUploadMiddleware("avatar"), postCreateUser);
   router.get("/admin/product", getAdminProductPage);
   router.get("/admin/order", getAdminOrderPage);
   app.use("/", router);

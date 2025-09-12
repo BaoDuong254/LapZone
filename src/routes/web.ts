@@ -4,6 +4,7 @@ import {
   getAdminUserPage,
   getDashboardPage,
 } from "controllers/admin/dashboard.controller";
+import { getProductPage } from "controllers/client/product.controller";
 import {
   getCreateUser,
   getHomePage,
@@ -18,6 +19,7 @@ const router = express.Router();
 
 const webRoutes = (app: Express) => {
   router.get("/", getHomePage);
+  router.get("/product/:id", getProductPage);
 
   // admin routes
   router.get("/admin", getDashboardPage);

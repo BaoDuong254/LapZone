@@ -58,17 +58,24 @@ const getUserByID = async (id?: string) => {
   return user;
 };
 
-const updateUserByID = async (id: string, fullname: string, email: string, address: string) => {
+const updateUserByID = async (
+  id: string,
+  fullname: string,
+  phone: string,
+  role: string,
+  address: string,
+  avatar: string
+) => {
   const updateUser = await prisma.user.update({
     where: {
       id: +id,
     },
     data: {
       fullName: fullname,
-      username: email,
+      phone: phone,
+      roleId: +role,
       address: address,
-      password: "123456",
-      accountType: "",
+      ...(avatar && { avatar: avatar }),
     },
   });
 };

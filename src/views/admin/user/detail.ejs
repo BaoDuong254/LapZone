@@ -37,14 +37,15 @@
             <div>
               <div style="width: 600px; margin: auto">
                 <h3 style="padding: 10px 0">View detail a user</h3>
-                <form action="/admin/handle-create-user" method="POST" enctype="multipart/form-data">
+                <form action="/admin/update-user" method="POST" enctype="multipart/form-data">
+                  <input type="text" name="id" value="<%= user.id%>" style="display: none;"/>
                   <div class="mb-3">
                     <label class="form-label">Full name</label>
                     <input type="text" class="form-control" placeholder="Your name" name="fullname" value="<%= user.fullName%>"/>
                   </div>
                   <div class="mb-3">
                     <label class="form-label">Email</label>
-                    <input type="email" class="form-control" placeholder="name@example.com" name="username" value="<%= user.username%>"/>
+                    <input disabled type="email" class="form-control" placeholder="name@example.com" name="username" value="<%= user.username%>"/>
                   </div>
                   <div class="row">
                     <div class="mb-3 col-6">
@@ -64,7 +65,11 @@
                     <label for="avatarFile" class="form-label">Avatar</label>
                     <input class="form-control" type="file" id="avatarFile" accept=".png, .jpg, .jpeg" name="avatar" />
                   </div>
-                  <img style="max-height: 250px; display: none" alt="avatar preview" id="avatarPreview" />
+                  <% if (user.avatar) { %>
+                    <img style="max-height: 250px; display: block" alt="avatar preview" id="avatarPreview" src="/images/<%=user.avatar %>"/>
+                  <% } else { %>
+                    <img style="max-height: 250px; display: none" alt="avatar preview" id="avatarPreview"/>
+                  <% } %>
                   <div class="mb-3">
                     <label class="form-label">Address</label>
                     <textarea class="form-control" rows="2" name="address"><%= user.address%></textarea>

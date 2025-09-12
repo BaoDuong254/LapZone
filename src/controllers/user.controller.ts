@@ -9,10 +9,7 @@ import {
 } from "services/user.service";
 
 const getHomePage = async (req: Request, res: Response) => {
-  const users = await getAllUsers();
-  return res.render("home", {
-    users: users,
-  });
+  return res.render("client/home/show.ejs");
 };
 
 const getCreateUser = async (req: Request, res: Response) => {

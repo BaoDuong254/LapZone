@@ -45,11 +45,11 @@
                     <td><%= product.factory %></td>
                     <td>
                       <div style="display: flex; gap: 10px">
-                        <form action="/admin/view-user/<%= product.id %>" method="get">
+                        <form action="/admin/view-product/<%= product.id %>" method="get">
                           <button class="btn btn-warning" type="submit">View</button>
                         </form>
                         <form
-                          action="/admin/delete-user/<%= product.id %>"
+                          action="/admin/delete-product/<%= product.id %>"
                           method="POST"
                           onsubmit="return confirm('Are you sure?')"
                         >

@@ -4,7 +4,7 @@ import {
   getAdminUserPage,
   getDashboardPage,
 } from "controllers/admin/dashboard.controller";
-import { getAdminCreateProductPage, postAdminCreateProduct } from "controllers/admin/product.controller";
+import { getAdminCreateProductPage, getViewProduct, postAdminCreateProduct, postDeleteProduct, postUpdateProduct } from "controllers/admin/product.controller";
 import { getProductPage } from "controllers/client/product.controller";
 import {
   getCreateUser,
@@ -23,6 +23,7 @@ const webRoutes = (app: Express) => {
   router.get("/product/:id", getProductPage);
 
   // admin routes
+  // User
   router.get("/admin", getDashboardPage);
   router.get("/admin/user", getAdminUserPage);
   router.get("/admin/create-user", getCreateUser);
@@ -30,10 +31,13 @@ const webRoutes = (app: Express) => {
   router.post("/admin/delete-user/:id", postDeleteUser);
   router.get("/admin/view-user/:id", getViewUser);
   router.post("/admin/update-user", fileUploadMiddleware("avatar"), postUpdateUser);
-
+  // Product
   router.get("/admin/product", getAdminProductPage);
   router.get("/admin/create-product", getAdminCreateProductPage);
   router.post("/admin/create-product", fileUploadMiddleware("image", "images/product"), postAdminCreateProduct);
+  router.post("/admin/delete-product/:id", postDeleteProduct);
+  router.get("/admin/view-product/:id", getViewProduct);
+  router.post("/admin/update-product", fileUploadMiddleware("image", "images/product"), postUpdateProduct);
 
 
   router.get("/admin/order", getAdminOrderPage);

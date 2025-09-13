@@ -36,7 +36,30 @@
                   <th>Factory</th>
                   <th>Action</th>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  <% products.forEach( function (product) { %>
+                  <tr>
+                    <td><%= product.id %></td>
+                    <td><%= product.name %></td>
+                    <td><%= product.price %></td>
+                    <td><%= product.factory %></td>
+                    <td>
+                      <div style="display: flex; gap: 10px">
+                        <form action="/admin/view-user/<%= product.id %>" method="get">
+                          <button class="btn btn-warning" type="submit">View</button>
+                        </form>
+                        <form
+                          action="/admin/delete-user/<%= product.id %>"
+                          method="POST"
+                          onsubmit="return confirm('Are you sure?')"
+                        >
+                          <button class="btn btn-danger" type="submit">Delete</button>
+                        </form>
+                      </div>
+                    </td>
+                  </tr>
+                  <% }) %>
+                </tbody>
               </table>
             </div>
           </div>

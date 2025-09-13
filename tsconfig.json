@@ -48,7 +48,8 @@
       "models/*": ["./src/models/*"],
       "routes/*": ["./src/routes/*"],
       "services/*": ["./src/services/*"],
-      "generated/*": ["./src/generated/*"]
+      "generated/*": ["./src/generated/*"],
+      "validation/*": ["./src/validation/*"],
     },
   }
 }

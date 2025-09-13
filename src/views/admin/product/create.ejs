@@ -32,34 +32,37 @@
             <h1 class="mt-4">Manage Products</h1>
             <ol class="breadcrumb mb-4">
               <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-              <li class="breadcrumb-item active"><a href="/admin/user">Products</a></li>
+              <li class="breadcrumb-item active"><a href="/admin/product">Products</a></li>
             </ol>
             <div>
               <div style="width: 600px; margin: auto">
+                <% errors.forEach( function (error) { %>
+                <div class="alert alert-danger mb-3"><%= error %></div>
+                <% }) %>
                 <h3 style="padding: 10px 0">Create a product</h3>
                 <form action="/admin/create-product" method="POST" enctype="multipart/form-data">
                   <div class="row">
                     <div class="mb-3 col-6">
                       <label class="form-label">Name</label>
-                      <input type="text" class="form-control" name="name" />
+                      <input type="text" class="form-control" name="name" value="<%= oldData.name %>" />
                     </div>
                     <div class="mb-3 col-6">
                       <label class="form-label">Price</label>
-                      <input type="number" class="form-control" name="price" />
+                      <input type="number" class="form-control" name="price" value="<%= oldData.price %>" />
                     </div>
                   </div>
                   <div class="mb-3">
                     <label class="form-label">Detail description</label>
-                    <textarea class="form-control" rows="2" name="detailDesc"></textarea>
+                    <textarea class="form-control" rows="2" name="detailDesc"><%= oldData.detailDesc %></textarea>
                   </div>
                   <div class="row">
                     <div class="mb-3 col-6">
                       <label class="form-label">Short description</label>
-                      <input type="text" class="form-control" name="shortDesc" />
+                      <input type="text" class="form-control" name="shortDesc" value="<%= oldData.shortDesc %>" />
                     </div>
                     <div class="mb-3 col-6">
                       <label class="form-label">Quantity</label>
-                      <input type="text" class="form-control" name="quantity" />
+                      <input type="text" class="form-control" name="quantity" value="<%= oldData.quantity %>" />
                     </div>
                   </div>
                   <div class="row">

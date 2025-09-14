@@ -22,6 +22,10 @@ app.use(express.static("public"));
 // seeding database
 initDatabase();
 
+app.use((req, res) => {
+  res.status(404).render("client/404");
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`);
 });

@@ -20,18 +20,29 @@
                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                   <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Account</h3></div>
                   <div class="card-body">
-                    <form>
-                        <div class="form-floating mb-3">
-                          <input
-                            class="form-control"
-                            type="text"
-                            placeholder="Enter your full name"
-                            name="fullName"
-                          />
-                          <label>Full name</label>
-                        </div>
+                    <% errors.forEach( function (error) { %>
+                    <div class="alert alert-danger mb-3"><%= error %></div>
+                    <% }) %>
+                    <form method="post" action="/register">
                       <div class="form-floating mb-3">
-                        <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
+                        <input
+                          class="form-control"
+                          type="text"
+                          placeholder="Enter your full name"
+                          name="fullName"
+                          value="<%= oldData.fullName  %>"
+                        />
+                        <label>Full name</label>
+                      </div>
+                      <div class="form-floating mb-3">
+                        <input
+                          class="form-control"
+                          id="inputEmail"
+                          type="email"
+                          placeholder="name@example.com"
+                          name="email"
+                          value="<%= oldData.email  %>"
+                        />
                         <label for="inputEmail">Email address</label>
                       </div>
                       <div class="row mb-3">
@@ -42,6 +53,8 @@
                               id="inputPassword"
                               type="password"
                               placeholder="Create a password"
+                              name="password"
+                              value="<%= oldData.password  %>"
                             />
                             <label for="inputPassword">Password</label>
                           </div>
@@ -53,6 +66,8 @@
                               id="inputPasswordConfirm"
                               type="password"
                               placeholder="Confirm password"
+                              name="confirmPassword"
+                              value="<%= oldData.confirmPassword  %>"
                             />
                             <label for="inputPasswordConfirm">Confirm Password</label>
                           </div>
@@ -60,7 +75,7 @@
                       </div>
                       <div class="mt-4 mb-0">
                         <div class="d-grid">
-                          <a class="btn btn-primary btn-block" href="login.html">Create Account</a>
+                          <button class="btn btn-primary btn-block" type="submit">Create Account</button>
                         </div>
                       </div>
                     </form>

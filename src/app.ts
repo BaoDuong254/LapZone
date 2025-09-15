@@ -4,6 +4,7 @@ import webRoutes from "routes/web";
 import initDatabase from "config/seed";
 import passport from "passport";
 import configPassportLocal from "src/middlewares/passport.local";
+import session from "express-session";
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -15,8 +16,18 @@ app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
 
+// config session for passport
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+
 // config passport
 app.use(passport.initialize());
+app.use(passport.authenticate('session'));
 configPassportLocal();
 
 // load routes

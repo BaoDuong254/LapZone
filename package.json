@@ -23,6 +23,7 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@quixo3/prisma-session-store": "^3.1.13",
     "@types/bcrypt": "^6.0.0",
     "@types/ejs": "^3.1.5",
     "@types/express": "^5.0.3",
@@ -40,7 +41,6 @@
     "nodemon": "^3.1.10",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
-    "prisma": "^6.15.0",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.9.2",
@@ -48,7 +48,8 @@
     "zod": "^4.1.8"
   },
   "devDependencies": {
-    "@prisma/client": "^6.15.0",
-    "@types/express-session": "^1.18.2"
+    "@prisma/client": "^6.16.1",
+    "@types/express-session": "^1.18.2",
+    "prisma": "^6.16.1"
   }
 }

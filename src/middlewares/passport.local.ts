@@ -1,7 +1,7 @@
 import { prisma } from "config/client";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
-import { comparePassword } from "services/user.service";
+import { comparePassword, getUserByID } from "services/user.service";
 
 const configPassportLocal = () => {
   passport.use(
@@ -33,15 +33,13 @@ const configPassportLocal = () => {
     )
   );
   passport.serializeUser(function (user: any, cb) {
-    process.nextTick(function () {
-      cb(null, { id: user.id, username: user.username });
-    });
+    cb(null, { id: user.id, username: user.username });
   });
 
-  passport.deserializeUser(function (user: any, cb) {
-    process.nextTick(function () {
-      return cb(null, user);
-    });
+  passport.deserializeUser(async function (user: any, cb) {
+    const { id } = user;
+    const userInDB = await getUserByID(id);
+    return cb(null, { ...userInDB });
   });
 };
 

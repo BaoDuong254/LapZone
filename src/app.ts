@@ -41,23 +41,23 @@ app.use(passport.initialize());
 app.use(passport.authenticate("session"));
 configPassportLocal();
 
+// config static files (phải được đặt trước routes)
+app.use(express.static("public"));
+
 // Make user object available in all views
 app.use((req, res, next) => {
-    res.locals.user = req.user || null; // Pass user object to all views
-    next();
+  res.locals.user = req.user || null; // Pass user object to all views
+  next();
 });
 
 // load routes
 webRoutes(app);
 
-// config static files
-app.use(express.static("public"));
-
 // seeding database
 initDatabase();
 
 app.use((req, res) => {
-  res.status(404).render("client/404");
+  res.status(404).render("status/404");
 });
 
 app.listen(port, () => {

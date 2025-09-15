@@ -29,7 +29,7 @@ import {
 } from "controllers/user.controller";
 import express, { Express } from "express";
 import passport from "passport";
-import { isAdmin, isLogin } from "src/middlewares/auth";
+import { isAdmin } from "src/middlewares/auth";
 import fileUploadMiddleware from "src/middlewares/multer";
 const router = express.Router();
 
@@ -37,7 +37,7 @@ const webRoutes = (app: Express) => {
   router.get("/", getHomePage);
   router.get("/success-redirect", getSuccessRedirectPage);
   router.get("/product/:id", getProductPage);
-  router.get("/login", isLogin, getLoginPage);
+  router.get("/login", getLoginPage);
   router.post(
     "/login",
     passport.authenticate("local", {
@@ -52,7 +52,7 @@ const webRoutes = (app: Express) => {
 
   // admin routes
   // User
-  router.get("/admin", isAdmin, getDashboardPage);
+  router.get("/admin", getDashboardPage);
   router.get("/admin/user", getAdminUserPage);
   router.get("/admin/create-user", getCreateUser);
   router.post("/admin/handle-create-user", fileUploadMiddleware("avatar"), postCreateUser);
@@ -68,7 +68,7 @@ const webRoutes = (app: Express) => {
   router.post("/admin/update-product", fileUploadMiddleware("image", "images/product"), postUpdateProduct);
 
   router.get("/admin/order", getAdminOrderPage);
-  app.use("/", router);
+  app.use("/", isAdmin, router);
 };
 
 export default webRoutes;

@@ -12,11 +12,11 @@ const initDatabase = async () => {
       data: [
         {
           name: "ADMIN",
-          description: "Admin thì full quyền",
+          description: "Admin with full permissions",
         },
         {
           name: "USER",
-          description: "User thông thường",
+          description: "Normal user with limited permissions",
         },
       ],
     });
@@ -31,8 +31,8 @@ const initDatabase = async () => {
       await prisma.user.createMany({
         data: [
           {
-            fullName: "Hỏi Dân IT",
-            username: "hoidanit@gmail.com",
+            fullName: "user",
+            username: "user@gmail.com",
             password: defaultPassword,
             accountType: ACCOUNT_TYPE.SYSTEM,
             roleId: adminRole.id,

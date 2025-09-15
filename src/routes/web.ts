@@ -4,7 +4,13 @@ import {
   getAdminUserPage,
   getDashboardPage,
 } from "controllers/admin/dashboard.controller";
-import { getAdminCreateProductPage, getViewProduct, postAdminCreateProduct, postDeleteProduct, postUpdateProduct } from "controllers/admin/product.controller";
+import {
+  getAdminCreateProductPage,
+  getViewProduct,
+  postAdminCreateProduct,
+  postDeleteProduct,
+  postUpdateProduct,
+} from "controllers/admin/product.controller";
 import { getLoginPage, getRegisterPage, postRegister } from "controllers/client/auth.controller";
 import { getProductPage } from "controllers/client/product.controller";
 import {
@@ -16,6 +22,7 @@ import {
   postUpdateUser,
 } from "controllers/user.controller";
 import express, { Express } from "express";
+import passport from "passport";
 import fileUploadMiddleware from "src/middlewares/multer";
 const router = express.Router();
 
@@ -23,6 +30,13 @@ const webRoutes = (app: Express) => {
   router.get("/", getHomePage);
   router.get("/product/:id", getProductPage);
   router.get("/login", getLoginPage);
+  router.post(
+    "/login",
+    passport.authenticate("local", {
+      successRedirect: "/",
+      failureRedirect: "/login",
+    })
+  );
   router.get("/register", getRegisterPage);
   router.post("/register", postRegister);
 
@@ -42,7 +56,6 @@ const webRoutes = (app: Express) => {
   router.post("/admin/delete-product/:id", postDeleteProduct);
   router.get("/admin/view-product/:id", getViewProduct);
   router.post("/admin/update-product", fileUploadMiddleware("image", "images/product"), postUpdateProduct);
-
 
   router.get("/admin/order", getAdminOrderPage);
   app.use("/", router);

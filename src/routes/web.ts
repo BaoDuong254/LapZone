@@ -11,7 +11,13 @@ import {
   postDeleteProduct,
   postUpdateProduct,
 } from "controllers/admin/product.controller";
-import { getLoginPage, getRegisterPage, postRegister } from "controllers/client/auth.controller";
+import {
+  getLoginPage,
+  getRegisterPage,
+  getSuccessRedirectPage,
+  postLogout,
+  postRegister,
+} from "controllers/client/auth.controller";
 import { getProductPage } from "controllers/client/product.controller";
 import {
   getCreateUser,
@@ -23,27 +29,30 @@ import {
 } from "controllers/user.controller";
 import express, { Express } from "express";
 import passport from "passport";
+import { isAdmin, isLogin } from "src/middlewares/auth";
 import fileUploadMiddleware from "src/middlewares/multer";
 const router = express.Router();
 
 const webRoutes = (app: Express) => {
   router.get("/", getHomePage);
+  router.get("/success-redirect", getSuccessRedirectPage);
   router.get("/product/:id", getProductPage);
-  router.get("/login", getLoginPage);
+  router.get("/login", isLogin, getLoginPage);
   router.post(
     "/login",
     passport.authenticate("local", {
-      successRedirect: "/",
+      successRedirect: "/success-redirect",
       failureRedirect: "/login",
       failureMessage: true,
     })
   );
+  router.post("/logout", postLogout);
   router.get("/register", getRegisterPage);
   router.post("/register", postRegister);
 
   // admin routes
   // User
-  router.get("/admin", getDashboardPage);
+  router.get("/admin", isAdmin, getDashboardPage);
   router.get("/admin/user", getAdminUserPage);
   router.get("/admin/create-user", getCreateUser);
   router.post("/admin/handle-create-user", fileUploadMiddleware("avatar"), postCreateUser);

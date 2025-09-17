@@ -18,7 +18,7 @@ import {
   postLogout,
   postRegister,
 } from "controllers/client/auth.controller";
-import { getProductPage, postAddProductToCart } from "controllers/client/product.controller";
+import { getCartPage, getProductPage, postAddProductToCart } from "controllers/client/product.controller";
 import {
   getCreateUser,
   getHomePage,
@@ -50,6 +50,7 @@ const webRoutes = (app: Express) => {
   router.get("/register", getRegisterPage);
   router.post("/register", postRegister);
   router.post("/add-product-to-cart/:id", postAddProductToCart);
+  router.get("/cart", getCartPage);
 
   // admin routes
   // User

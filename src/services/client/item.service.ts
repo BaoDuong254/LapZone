@@ -114,10 +114,51 @@ const updateCartDetailBeforeCheckout = async (data: { id: string; quantity: stri
       where: { id: Number(data[i]?.id) },
       data: {
         quantity: Number(data[i]?.quantity),
-      }
+      },
     });
   }
   return;
+};
+
+const handlePlaceOrder = async (
+  userId: number,
+  receiverName: string,
+  receiverAddress: string,
+  receiverPhone: string,
+  totalPrice: number
+) => {
+  const cart = await prisma.cart.findUnique({
+    where: { userId: userId },
+    include: { cartDetails: true },
+  });
+  if (cart) {
+    const dataOrderDetail = cart?.cartDetails?.map((item) => ({
+      productId: item.productId,
+      price: item.price,
+      quantity: item.quantity,
+    })) || [];
+    await prisma.order.create({
+      data: {
+        receiverName,
+        receiverAddress,
+        receiverPhone,
+        paymentMethod: "COD",
+        paymentStatus: "PAYMENT_UNPAID",
+        status: "PENDING",
+        totalPrice: totalPrice,
+        userId,
+        orderDetails: {
+          create: dataOrderDetail,
+        }
+      },
+    });
+    await prisma.cartDetail.deleteMany({
+      where: { cartId: cart.id },
+    });
+    await prisma.cart.delete({
+      where: { id: cart.id },
+    });
+  }
 };
 
 export {
@@ -127,4 +168,5 @@ export {
   getProductInCart,
   deleteProductInCart,
   updateCartDetailBeforeCheckout,
+  handlePlaceOrder,
 };

@@ -18,7 +18,7 @@ import {
   postLogout,
   postRegister,
 } from "controllers/client/auth.controller";
-import { getCartPage, getCheckOutPage, getProductPage, postAddProductToCart, postDeleteProductInCart, postHandleCartToCheckout } from "controllers/client/product.controller";
+import { getCartPage, getCheckOutPage, getProductPage, getThanksPage, postAddProductToCart, postDeleteProductInCart, postHandleCartToCheckout, postPlaceOrder } from "controllers/client/product.controller";
 import {
   getCreateUser,
   getHomePage,
@@ -55,6 +55,8 @@ const webRoutes = (app: Express) => {
   router.post("/delete-product-in-cart/:id", postDeleteProductInCart);
   router.post("/handle-cart-to-checkout", postHandleCartToCheckout);
   router.get("/checkout", getCheckOutPage);
+  router.post("/place-order", postPlaceOrder);
+  router.get("/thanks", getThanksPage);
 
   // admin routes
   // User

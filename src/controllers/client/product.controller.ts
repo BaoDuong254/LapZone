@@ -75,7 +75,7 @@ const postPlaceOrder = async (req: Request, res: Response) => {
   if (!user) {
     return res.redirect("/login");
   }
-  const {receiverName, receiverAddress, receiverPhone, totalPrice} = req.body;
+  const { receiverName, receiverAddress, receiverPhone, totalPrice } = req.body;
   await handlePlaceOrder(user.id, receiverName, receiverAddress, receiverPhone, +totalPrice);
   return res.redirect("/thanks");
 };
@@ -86,7 +86,7 @@ const getThanksPage = async (req: Request, res: Response) => {
     return res.redirect("/login");
   }
   return res.render("client/product/thanks.ejs");
-}
+};
 
 const getOrderHistoryPage = async (req: Request, res: Response) => {
   const user = req.user;
@@ -94,8 +94,19 @@ const getOrderHistoryPage = async (req: Request, res: Response) => {
     return res.redirect("/login");
   }
   const orders = await getOrderHistory(user.id);
-  return res.render("client/product/order.history.ejs", {orders});
-}
+  return res.render("client/product/order.history.ejs", { orders });
+};
+
+const postAddToCartFromDetailPage = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { quantity } = req.body;
+  const user = req.user;
+  if (!user) {
+    return res.redirect("/login");
+  }
+  await addProductToCart(+quantity, Number(id), user);
+  return res.redirect(`/product/${id}`);
+};
 
 export {
   getProductPage,
@@ -106,5 +117,6 @@ export {
   postHandleCartToCheckout,
   postPlaceOrder,
   getThanksPage,
-  getOrderHistoryPage
+  getOrderHistoryPage,
+  postAddToCartFromDetailPage,
 };

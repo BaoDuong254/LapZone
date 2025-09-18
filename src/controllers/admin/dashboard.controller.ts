@@ -1,10 +1,14 @@
 import { Request, Response } from "express";
+import { getDashboardInfo } from "services/admin/dashboard.service";
 import { getOrderAdmin, getOrderDetailAdmin } from "services/admin/order.service";
 import { getProductList } from "services/admin/product.service";
 import { getAllUsers } from "services/user.service";
 
 const getDashboardPage = async (req: Request, res: Response) => {
-  return res.render("admin/dashboard/show");
+  const info = await getDashboardInfo();
+  return res.render("admin/dashboard/show", {
+    info,
+  });
 };
 
 const getAdminUserPage = async (req: Request, res: Response) => {
@@ -25,7 +29,7 @@ const getAdminOrderPage = async (req: Request, res: Response) => {
 const getAdminOrderDetailPage = async (req: Request, res: Response) => {
   const { id } = req.params;
   const orderDetails = await getOrderDetailAdmin(Number(id));
-  return res.render("admin/order/detail.ejs", { orderDetails: orderDetails, id});
+  return res.render("admin/order/detail.ejs", { orderDetails: orderDetails, id });
 };
 
 export { getDashboardPage, getAdminUserPage, getAdminProductPage, getAdminOrderPage, getAdminOrderDetailPage };

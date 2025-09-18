@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { getProductById } from "services/admin/product.service";
-import { addProductToCart, deleteProductInCart, getProductInCart } from "services/client/item.service";
+import { addProductToCart, deleteProductInCart, getProductInCart, updateCartDetailBeforeCheckout } from "services/client/item.service";
 
 const getProductPage = async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -27,7 +27,7 @@ const getCartPage = async (req: Request, res: Response) => {
   const cartDetails = await getProductInCart(+user.id);
   const totalPrice = cartDetails?.map((item) => +item.price * +item.quantity).reduce((a, b) => a + b, 0) || 0;
   return res.render("client/product/cart.ejs", { cartDetails, totalPrice });
-}
+};
 
 const postDeleteProductInCart = async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -38,7 +38,7 @@ const postDeleteProductInCart = async (req: Request, res: Response) => {
   await deleteProductInCart(+id!, user.id, user.sumCart!);
   // Logic to delete product from cart goes here
   return res.redirect("/cart");
-}
+};
 
 const getCheckOutPage = async (req: Request, res: Response) => {
   const user = req.user;
@@ -48,6 +48,19 @@ const getCheckOutPage = async (req: Request, res: Response) => {
   const cartDetails = await getProductInCart(+user.id);
   const totalPrice = cartDetails?.map((item) => +item.price * +item.quantity).reduce((a, b) => a + b, 0) || 0;
   return res.render("client/product/checkout.ejs", { cartDetails, totalPrice });
-}
+};
 
-export { getProductPage, postAddProductToCart, getCartPage, postDeleteProductInCart, getCheckOutPage };
+const postHandleCartToCheckout = async (req: Request, res: Response) => {
+  const user = req.user;
+  if (!user) {
+    return res.redirect("/login");
+  }
+  const currentCartDetail: {
+    id: string;
+    quantity: string;
+  }[] = req.body?.cartDetails || [];
+  await updateCartDetailBeforeCheckout(currentCartDetail);
+  return res.redirect("/checkout");
+};
+
+export { getProductPage, postAddProductToCart, getCartPage, postDeleteProductInCart, getCheckOutPage, postHandleCartToCheckout };

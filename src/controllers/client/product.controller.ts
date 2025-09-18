@@ -33,7 +33,8 @@ const getCartPage = async (req: Request, res: Response) => {
   }
   const cartDetails = await getProductInCart(+user.id);
   const totalPrice = cartDetails?.map((item) => +item.price * +item.quantity).reduce((a, b) => a + b, 0) || 0;
-  return res.render("client/product/cart.ejs", { cartDetails, totalPrice });
+  const cartId = cartDetails.length ? cartDetails[0]?.cartId : 0;
+  return res.render("client/product/cart.ejs", { cartDetails, totalPrice, cartId });
 };
 
 const postDeleteProductInCart = async (req: Request, res: Response) => {
@@ -62,11 +63,12 @@ const postHandleCartToCheckout = async (req: Request, res: Response) => {
   if (!user) {
     return res.redirect("/login");
   }
+  const { cartId } = req.body;
   const currentCartDetail: {
     id: string;
     quantity: string;
   }[] = req.body?.cartDetails || [];
-  await updateCartDetailBeforeCheckout(currentCartDetail);
+  await updateCartDetailBeforeCheckout(currentCartDetail, cartId);
   return res.redirect("/checkout");
 };
 

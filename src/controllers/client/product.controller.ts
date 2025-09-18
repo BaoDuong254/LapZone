@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { getProductById } from "services/admin/product.service";
-import { addProductToCart, getProductInCart } from "services/client/item.service";
+import { addProductToCart, deleteProductInCart, getProductInCart } from "services/client/item.service";
 
 const getProductPage = async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -29,4 +29,15 @@ const getCartPage = async (req: Request, res: Response) => {
   return res.render("client/product/cart.ejs", { cartDetails, totalPrice });
 }
 
-export { getProductPage, postAddProductToCart, getCartPage };
+const postDeleteProductInCart = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const user = req.user;
+  if (!user) {
+    return res.redirect("/login");
+  }
+  await deleteProductInCart(+id!, user.id, user.sumCart!);
+  // Logic to delete product from cart goes here
+  return res.redirect("/cart");
+}
+
+export { getProductPage, postAddProductToCart, getCartPage, postDeleteProductInCart };

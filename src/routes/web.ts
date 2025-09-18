@@ -1,4 +1,5 @@
 import {
+  getAdminOrderDetailPage,
   getAdminOrderPage,
   getAdminProductPage,
   getAdminUserPage,
@@ -76,6 +77,7 @@ const webRoutes = (app: Express) => {
   router.post("/admin/update-product", fileUploadMiddleware("image", "images/product"), postUpdateProduct);
 
   router.get("/admin/order", getAdminOrderPage);
+  router.get("/admin/order/:id", getAdminOrderDetailPage);
   app.use("/", isAdmin, router);
 };
 

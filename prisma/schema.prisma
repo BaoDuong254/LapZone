@@ -95,7 +95,7 @@ model Order {
   paymentRef    String? // e.g., transaction id from banking system
 
   user   User   @relation(fields: [userId], references: [id])
-  userId Int  @unique
+  userId Int
 
   orderDetails OrderDetail[]
 

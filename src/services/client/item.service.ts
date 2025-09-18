@@ -132,11 +132,12 @@ const handlePlaceOrder = async (
     include: { cartDetails: true },
   });
   if (cart) {
-    const dataOrderDetail = cart?.cartDetails?.map((item) => ({
-      productId: item.productId,
-      price: item.price,
-      quantity: item.quantity,
-    })) || [];
+    const dataOrderDetail =
+      cart?.cartDetails?.map((item) => ({
+        productId: item.productId,
+        price: item.price,
+        quantity: item.quantity,
+      })) || [];
     await prisma.order.create({
       data: {
         receiverName,
@@ -149,7 +150,7 @@ const handlePlaceOrder = async (
         userId,
         orderDetails: {
           create: dataOrderDetail,
-        }
+        },
       },
     });
     await prisma.cartDetail.deleteMany({
@@ -161,6 +162,14 @@ const handlePlaceOrder = async (
   }
 };
 
+const getOrderHistory = async (userId: number) => {
+  const orders = await prisma.order.findMany({
+    where: { userId },
+    include: { orderDetails: { include: { product: true } } },
+  });
+  return orders;
+};
+
 export {
   getProducts,
   getProductById,
@@ -169,4 +178,5 @@ export {
   deleteProductInCart,
   updateCartDetailBeforeCheckout,
   handlePlaceOrder,
+  getOrderHistory,
 };

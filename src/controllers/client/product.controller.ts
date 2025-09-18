@@ -3,6 +3,7 @@ import { getProductById } from "services/admin/product.service";
 import {
   addProductToCart,
   deleteProductInCart,
+  getOrderHistory,
   getProductInCart,
   handlePlaceOrder,
   updateCartDetailBeforeCheckout,
@@ -87,6 +88,15 @@ const getThanksPage = async (req: Request, res: Response) => {
   return res.render("client/product/thanks.ejs");
 }
 
+const getOrderHistoryPage = async (req: Request, res: Response) => {
+  const user = req.user;
+  if (!user) {
+    return res.redirect("/login");
+  }
+  const orders = await getOrderHistory(user.id);
+  return res.render("client/product/order.history.ejs", {orders});
+}
+
 export {
   getProductPage,
   postAddProductToCart,
@@ -95,5 +105,6 @@ export {
   getCheckOutPage,
   postHandleCartToCheckout,
   postPlaceOrder,
-  getThanksPage
+  getThanksPage,
+  getOrderHistoryPage
 };

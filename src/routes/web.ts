@@ -19,7 +19,7 @@ import {
   postLogout,
   postRegister,
 } from "controllers/client/auth.controller";
-import { getCartPage, getCheckOutPage, getProductPage, getThanksPage, postAddProductToCart, postDeleteProductInCart, postHandleCartToCheckout, postPlaceOrder } from "controllers/client/product.controller";
+import { getCartPage, getCheckOutPage, getOrderHistoryPage, getProductPage, getThanksPage, postAddProductToCart, postDeleteProductInCart, postHandleCartToCheckout, postPlaceOrder } from "controllers/client/product.controller";
 import {
   getCreateUser,
   getHomePage,
@@ -35,6 +35,7 @@ import fileUploadMiddleware from "src/middlewares/multer";
 const router = express.Router();
 
 const webRoutes = (app: Express) => {
+  // client routes
   router.get("/", getHomePage);
   router.get("/success-redirect", getSuccessRedirectPage);
   router.get("/product/:id", getProductPage);
@@ -50,7 +51,6 @@ const webRoutes = (app: Express) => {
   router.post("/logout", postLogout);
   router.get("/register", getRegisterPage);
   router.post("/register", postRegister);
-
   router.post("/add-product-to-cart/:id", postAddProductToCart);
   router.get("/cart", getCartPage);
   router.post("/delete-product-in-cart/:id", postDeleteProductInCart);
@@ -58,6 +58,7 @@ const webRoutes = (app: Express) => {
   router.get("/checkout", getCheckOutPage);
   router.post("/place-order", postPlaceOrder);
   router.get("/thanks", getThanksPage);
+  router.get("/order-history", getOrderHistoryPage);
 
   // admin routes
   // User
@@ -75,9 +76,10 @@ const webRoutes = (app: Express) => {
   router.post("/admin/delete-product/:id", postDeleteProduct);
   router.get("/admin/view-product/:id", getViewProduct);
   router.post("/admin/update-product", fileUploadMiddleware("image", "images/product"), postUpdateProduct);
-
+  // Order
   router.get("/admin/order", getAdminOrderPage);
   router.get("/admin/order/:id", getAdminOrderDetailPage);
+
   app.use("/", isAdmin, router);
 };
 

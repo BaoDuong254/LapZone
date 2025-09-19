@@ -307,4 +307,90 @@
     const sort = params.get("sort");
     $(`input[type="radio"][name="radio-sort"][value="${sort}"]`).prop("checked", true);
   }
+  //toast
+  $(".btnAddToCartHomepage").click(function (event) {
+    event.preventDefault();
+    if (!isLogin()) {
+      $.toast({
+        heading: "Lỗi thao tác",
+        text: "Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng",
+        position: "top-right",
+        icon: "error",
+      });
+      return;
+    }
+    const productId = $(this).attr("data-product-id");
+    $.ajax({
+      url: `${window.location.origin}/api/add-product-to-cart`,
+      type: "POST",
+      data: JSON.stringify({ productId, quantity: 1 }),
+      contentType: "application/json",
+      success: function (response) {
+        const sum = +response.data;
+        $("#sumCart").text(sum);
+        $.toast({
+          heading: "Giỏ hàng",
+          text: "Thêm sản phẩm vào giỏ hàng thành công",
+          position: "top-right",
+          icon: "success",
+        });
+      },
+      error: function (xhr, status, error) {
+        $.toast({
+          heading: "Lỗi thao tác",
+          text: "Đã có lỗi xảy ra, vui lòng thử lại",
+          position: "top-right",
+          icon: "error",
+        });
+      },
+    });
+  });
+  $(".btnAddToCartDetail").click(function (event) {
+    event.preventDefault();
+    if (!isLogin()) {
+      $.toast({
+        heading: "Lỗi thao tác",
+        text: "Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng",
+        position: "top-right",
+        icon: "error",
+      });
+      return;
+    }
+    const productId = $(this).attr("data-product-id");
+    const quantity = +$("#quantityDetail").val() || 1;
+    $.ajax({
+      url: `${window.location.origin}/api/add-product-to-cart`,
+      type: "POST",
+      data: JSON.stringify({ productId, quantity }),
+      contentType: "application/json",
+      success: function (response) {
+        const sum = +response.data;
+        $("#sumCart").text(sum);
+        $.toast({
+          heading: "Giỏ hàng",
+          text: "Thêm sản phẩm vào giỏ hàng thành công",
+          position: "top-right",
+          icon: "success",
+        });
+      },
+      error: function (xhr, status, error) {
+        $.toast({
+          heading: "Lỗi thao tác",
+          text: "Đã có lỗi xảy ra, vui lòng thử lại",
+          position: "top-right",
+          icon: "error",
+        });
+      },
+    });
+  });
+
+  //check login
+  function isLogin() {
+    const navElements = $("#navbarCollapse");
+    const childLogin = navElements.find("a.a-login");
+    if (childLogin>0) {
+      return false;
+    }
+    return true;
+  }
 })(jQuery);

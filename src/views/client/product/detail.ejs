@@ -28,6 +28,13 @@
 
     <!-- Template Stylesheet -->
     <link href="/client/css/style.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css"
+      integrity="sha512-wJgJNTBBkLit7ymC6vvzM1EcSWeM9mmOu+1USHaRBbHkm6W9EgM0HY27+UtUaprntaYQJF75rc8gjxllKs5OIQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
 
   <body>
@@ -96,9 +103,10 @@
                 <form action="/add-to-cart-from-detail-page/<%= product.id %>" method="POST">
                   <input type="text" name="quantity" id="quantityDetail" value="1" hidden />
                   <button
+                    data-product-id="<%= product.id %>"
                     type="submit"
                     href="#"
-                    class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"
+                    class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary btnAddToCartDetail"
                   >
                     <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
                   </button>
@@ -194,5 +202,11 @@
 
     <!-- Template Javascript -->
     <script src="/client/js/main.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"
+      integrity="sha512-zlWWyZq71UMApAjih4WkaRpikgY9Bz1oXIW5G0fED4vk14JjGlQ1UmkGM392jEULP8jbNMiwLWdM8Z87Hu88Fw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
   </body>
 </html>

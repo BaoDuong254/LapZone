@@ -9,6 +9,7 @@ import configPassportLocal from "src/middlewares/passport.local";
 import session from "express-session";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import { PrismaClient } from "generated/prisma";
+import apiRoutes from "routes/api";
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -52,6 +53,7 @@ app.use((req, res, next) => {
 
 // load routes
 webRoutes(app);
+apiRoutes(app);
 
 // seeding database
 initDatabase();

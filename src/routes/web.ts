@@ -23,6 +23,7 @@ import { getCartPage, getCheckOutPage, getOrderHistoryPage, getProductPage, getT
 import {
   getCreateUser,
   getHomePage,
+  getProductFilterPage,
   getViewUser,
   postCreateUser,
   postDeleteUser,
@@ -37,6 +38,7 @@ const router = express.Router();
 const webRoutes = (app: Express) => {
   // client routes
   router.get("/", getHomePage);
+  router.get("/products", getProductFilterPage);
   router.get("/success-redirect", getSuccessRedirectPage);
   router.get("/product/:id", getProductPage);
   router.get("/login", getLoginPage);

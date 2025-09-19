@@ -12,7 +12,12 @@ const getDashboardPage = async (req: Request, res: Response) => {
 };
 
 const getAdminUserPage = async (req: Request, res: Response) => {
-  const users = await getAllUsers();
+  const { page } = req.query;
+  let currentPage = page ? +page : 1;
+  if (currentPage < 1) {
+    currentPage = 1;
+  }
+  const users = await getAllUsers(currentPage);
   return res.render("admin/user/show.ejs", { users: users });
 };
 

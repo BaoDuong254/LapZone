@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { getDashboardInfo } from "services/admin/dashboard.service";
-import { getOrderAdmin, getOrderDetailAdmin } from "services/admin/order.service";
-import { getProductList } from "services/admin/product.service";
+import { countTotalOrdersPages, getOrderAdmin, getOrderDetailAdmin } from "services/admin/order.service";
+import { countTotalProductsPages, getProductList } from "services/admin/product.service";
 import { countTotalUsersPages, getAllUsers } from "services/user.service";
 
 const getDashboardPage = async (req: Request, res: Response) => {
@@ -23,13 +23,25 @@ const getAdminUserPage = async (req: Request, res: Response) => {
 };
 
 const getAdminProductPage = async (req: Request, res: Response) => {
-  const products = await getProductList();
-  return res.render("admin/product/show.ejs", { products: products });
+  const { page } = req.query;
+  let currentPage = page ? +page : 1;
+  if (currentPage < 1) {
+    currentPage = 1;
+  }
+  const totalPages = await countTotalProductsPages();
+  const products = await getProductList(currentPage);
+  return res.render("admin/product/show.ejs", { products: products, totalPages: +totalPages, page: +currentPage! });
 };
 
 const getAdminOrderPage = async (req: Request, res: Response) => {
-  const orders = await getOrderAdmin();
-  return res.render("admin/order/show.ejs", { orders: orders });
+  const { page } = req.query;
+  let currentPage = page ? +page : 1;
+  if (currentPage < 1) {
+    currentPage = 1;
+  }
+  const totalPages = await countTotalOrdersPages();
+  const orders = await getOrderAdmin(currentPage);
+  return res.render("admin/order/show.ejs", { orders: orders, totalPages: +totalPages, page: +currentPage! });
 };
 
 const getAdminOrderDetailPage = async (req: Request, res: Response) => {

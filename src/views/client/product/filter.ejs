@@ -203,8 +203,7 @@
                     </div>
                   </div>
                 </div>
-                <% }) %>
-
+                <% }) %> <% if(products?.length){ %>
                 <div class="pagination d-flex justify-content-center mt-5">
                   <li class="<%= page === 1 ? 'disabled page-item' : 'page-item' %>">
                     <a class="page-link" href="/products?page=<%= page - 1  %>" aria-label="Previous">
@@ -224,6 +223,11 @@
                     </a>
                   </li>
                 </div>
+                <% } else { %>
+                <div class="d-flex justify-content-center align-items-center" style="height: 300px">
+                  <h3 class="text-secondary">Không tìm thấy sản phẩm phù hợp</h3>
+                </div>
+                <% } %>
               </div>
             </div>
           </div>

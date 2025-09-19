@@ -12,10 +12,10 @@
           ><a href="#" class="text-white"><%= user?.username ?? "" %></a></small
         >
         <% } else { %>
-          <small class="me-3">
-            <i class="fas fa-voicemail me-2 text-secondary"></i>
-          </small>
-          <% } %>
+        <small class="me-3">
+          <i class="fas fa-voicemail me-2 text-secondary"></i>
+        </small>
+        <% } %>
       </div>
       <div class="top-link pe-2">
         <a href="/terms" class="text-white"><small class="text-white mx-2">Điều khoản sử dụng</small>/</a>
@@ -41,10 +41,9 @@
               class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
               style="top: -5px; left: 15px; height: 20px; min-width: 20px"
               id="sumCart"
-              >
-              <%= user?.sumCart ?? 0 %>
-              </span
             >
+              <%= user?.sumCart ?? 0 %>
+            </span>
           </a>
           <% if(user) {%>
           <div class="dropdown my-auto">
@@ -70,7 +69,7 @@
                 <div class="text-center my-3"><%= user.fullName %></div>
               </li>
 
-              <li><a class="dropdown-item" href="#">Quản lý tài khoản</a></li>
+              <li><a class="dropdown-item" href="/account">Quản lý tài khoản</a></li>
 
               <li><a class="dropdown-item" href="/order-history">Lịch sử mua hàng</a></li>
               <li>

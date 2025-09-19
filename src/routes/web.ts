@@ -19,7 +19,19 @@ import {
   postLogout,
   postRegister,
 } from "controllers/client/auth.controller";
-import { getCartPage, getCheckOutPage, getOrderHistoryPage, getProductPage, getThanksPage, postAddProductToCart, postAddToCartFromDetailPage, postDeleteProductInCart, postHandleCartToCheckout, postPlaceOrder } from "controllers/client/product.controller";
+import { getAccountPage, postUpdateProfile } from "controllers/client/account.controller";
+import {
+  getCartPage,
+  getCheckOutPage,
+  getOrderHistoryPage,
+  getProductPage,
+  getThanksPage,
+  postAddProductToCart,
+  postAddToCartFromDetailPage,
+  postDeleteProductInCart,
+  postHandleCartToCheckout,
+  postPlaceOrder,
+} from "controllers/client/product.controller";
 import {
   getAboutPage,
   getCreateUser,
@@ -68,6 +80,10 @@ const webRoutes = (app: Express) => {
   router.get("/about", getAboutPage);
   router.get("/support", getSupportPage);
   router.get("/terms", getTermsPage);
+
+  // Account management routes
+  router.get("/account", getAccountPage);
+  router.post("/account/update-profile", fileUploadMiddleware("avatar"), postUpdateProfile);
 
   // admin routes
   // User

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Quản lý tài khoản</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="keywords" />
+    <meta content="" name="description" />
+    <link rel="icon" type="image/svg" href="/favicon/favicon.svg" />
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <!-- Libraries Stylesheet -->
+    <link href="/client/lib/lightbox/css/lightbox.min.css" rel="stylesheet" />
+    <link href="/client/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/client/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Template Stylesheet -->
+    <link href="/client/css/style.css" rel="stylesheet" />
+
+    <style>
+      .account-section {
+        background: #f8f9fa;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+        overflow: hidden;
+      }
+
+      .section-header {
+        background: linear-gradient(135deg, #81c408 0%, #6a9b07 100%);
+        color: white;
+        padding: 1.5rem;
+        margin: 0;
+      }
+
+      .section-body {
+        padding: 2rem;
+      }
+
+      .profile-avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #81c408;
+        margin-bottom: 1rem;
+      }
+
+      #avatarPreview {
+        max-height: 200px;
+        max-width: 200px;
+        border-radius: 10px;
+        border: 2px solid #81c408;
+        margin-top: 10px;
+        object-fit: cover;
+      }
+
+      .form-floating > .form-control:focus ~ label {
+        color: #81c408;
+      }
+
+      .form-floating > .form-control:focus {
+        border-color: #81c408;
+        box-shadow: 0 0 0 0.25rem rgba(129, 196, 8, 0.25);
+      }
+
+      .btn-update {
+        background: linear-gradient(135deg, #81c408 0%, #6a9b07 100%);
+        border: none;
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .btn-update:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(129, 196, 8, 0.3);
+      }
+
+      .alert {
+        border-radius: 10px;
+        border: none;
+        padding: 1rem 1.5rem;
+      }
+
+      .alert-success {
+        background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+        color: #155724;
+      }
+
+      .alert-danger {
+        background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+        color: #721c24;
+      }
+
+      .nav-tabs .nav-link {
+        border: none;
+        color: #6c757d;
+        font-weight: 600;
+        padding: 1rem 2rem;
+        transition: all 0.3s ease;
+      }
+
+      .nav-tabs .nav-link.active {
+        background: linear-gradient(135deg, #81c408 0%, #6a9b07 100%);
+        color: white;
+        border-radius: 10px 10px 0 0;
+      }
+
+      .tab-content {
+        background: white;
+        border-radius: 0 10px 10px 10px;
+        padding: 2rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Spinner Start -->
+    <div
+      id="spinner"
+      class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50 d-flex align-items-center justify-content-center"
+    >
+      <div class="spinner-grow text-primary" role="status"></div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Navbar start -->
+    <%- include('../layout/header'); -%>
+    <!-- Navbar End -->
+    <div class="py-5"></div>
+
+    <!-- Account Management Page Start -->
+    <div class="container-fluid py-5">
+      <div class="container py-5">
+        <div class="text-center mb-5">
+          <h1 class="display-4 text-dark mb-4">Quản lý tài khoản</h1>
+          <p class="lead text-secondary">Cập nhật thông tin cá nhân và bảo mật tài khoản của bạn</p>
+        </div>
+
+        <!-- Success/Error Messages -->
+        <% if (successMessage) { %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <i class="fas fa-check-circle me-2"></i>
+          <%= successMessage %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        <% } %> <% if (errorMessage) { %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <i class="fas fa-exclamation-triangle me-2"></i>
+          <%= errorMessage %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        <% } %>
+
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <!-- Profile Overview -->
+            <div class="account-section">
+              <div class="section-header">
+                <div class="row align-items-center">
+                  <div class="col-md-8">
+                    <h3 class="mb-0"><i class="fas fa-user me-2"></i>Thông tin tài khoản</h3>
+                  </div>
+                  <div class="col-md-4 text-end">
+                    <small><i class="fas fa-crown me-1"></i><%= user?.role?.name || 'USER' %></small>
+                  </div>
+                </div>
+              </div>
+              <div class="section-body">
+                <div class="row align-items-center">
+                  <div class="col-md-3 text-center">
+                    <img src="/images/<%= user?.avatar || 'avatar.jpg' %>" alt="Avatar" class="profile-avatar" />
+                  </div>
+                  <div class="col-md-9">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <p class="mb-2">
+                          <strong><i class="fas fa-user me-2 text-primary"></i>Họ và tên:</strong> <%= user?.fullName ||
+                          'Chưa cập nhật' %>
+                        </p>
+                        <p class="mb-2">
+                          <strong><i class="fas fa-envelope me-2 text-primary"></i>Email:</strong> <%= user?.username ||
+                          'Chưa cập nhật' %>
+                        </p>
+                      </div>
+                      <div class="col-md-6">
+                        <p class="mb-2">
+                          <strong><i class="fas fa-phone me-2 text-primary"></i>Số điện thoại:</strong> <%= user?.phone
+                          || 'Chưa cập nhật' %>
+                        </p>
+                        <p class="mb-2">
+                          <strong><i class="fas fa-map-marker-alt me-2 text-primary"></i>Địa chỉ:</strong> <%=
+                          user?.address || 'Chưa cập nhật' %>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Management Tabs -->
+            <div class="card border-0 shadow-lg">
+              <div class="card-header bg-transparent border-0 p-0">
+                <ul class="nav nav-tabs" id="accountTabs" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button
+                      class="nav-link active"
+                      id="profile-tab"
+                      data-bs-toggle="tab"
+                      data-bs-target="#profile"
+                      type="button"
+                      role="tab"
+                    >
+                      <i class="fas fa-user-edit me-2"></i>Cập nhật thông tin
+                    </button>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="tab-content" id="accountTabsContent">
+                <!-- Update Profile Tab -->
+                <div class="tab-pane fade show active" id="profile" role="tabpanel">
+                  <h5 class="mb-4 text-primary"><i class="fas fa-user-edit me-2"></i>Cập nhật thông tin cá nhân</h5>
+
+                  <!-- Profile Errors -->
+                  <% if (profileErrors && profileErrors.length > 0) { %>
+                  <div class="alert alert-danger">
+                    <ul class="mb-0">
+                      <% profileErrors.forEach(error => { %>
+                      <li><%= error %></li>
+                      <% }) %>
+                    </ul>
+                  </div>
+                  <% } %>
+
+                  <form method="POST" action="/account/update-profile" enctype="multipart/form-data">
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <div class="form-floating">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="fullName"
+                            name="fullName"
+                            placeholder="Họ và tên"
+                            value="<%= oldProfileData?.fullName || user?.fullName || '' %>"
+                            required
+                          />
+                          <label for="fullName"><i class="fas fa-user me-2"></i>Họ và tên</label>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <div class="form-floating">
+                          <input
+                            type="tel"
+                            class="form-control"
+                            id="phone"
+                            name="phone"
+                            placeholder="Số điện thoại"
+                            value="<%= oldProfileData?.phone || user?.phone || '' %>"
+                          />
+                          <label for="phone"><i class="fas fa-phone me-2"></i>Số điện thoại</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="mb-3">
+                      <div class="form-floating">
+                        <textarea
+                          class="form-control"
+                          id="address"
+                          name="address"
+                          placeholder="Địa chỉ"
+                          style="height: 100px"
+                        ><%= oldProfileData?.address || user?.address || '' %></textarea>
+                        <label for="address"><i class="fas fa-map-marker-alt me-2"></i>Địa chỉ</label>
+                      </div>
+                    </div>
+
+                    <div class="mb-3">
+                      <label class="form-label"><i class="fas fa-image me-2"></i>Ảnh đại diện</label>
+                      <input type="file" class="form-control" id="avatarFile" name="avatar" accept="image/*" />
+                      <div class="form-text">Chọn ảnh JPG, PNG hoặc GIF. Kích thước tối đa 5MB.</div>
+                      <img style="display: none" alt="Avatar Preview" id="avatarPreview" />
+                    </div>
+
+                    <div class="text-end">
+                      <button type="submit" class="btn btn-update text-white">
+                        <i class="fas fa-save me-2"></i>Cập nhật thông tin
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Account Management Page End -->
+
+    <!-- Footer Start -->
+    <%- include('../layout/footer'); -%>
+    <!-- Footer End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"
+      ><i class="fa fa-arrow-up"></i
+    ></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/client/lib/easing/easing.min.js"></script>
+    <script src="/client/lib/waypoints/waypoints.min.js"></script>
+    <script src="/client/lib/lightbox/js/lightbox.min.js"></script>
+    <script src="/client/lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="/client/js/main.js"></script>
+
+    <script>
+      // Avatar preview functionality
+      $(document).ready(function () {
+        const avatarFile = $("#avatarFile");
+        const avatarPreview = $("#avatarPreview");
+
+        avatarFile.change(function (e) {
+          const file = e.target.files[0];
+          if (file) {
+            const imgURL = URL.createObjectURL(file);
+            avatarPreview.attr("src", imgURL);
+            avatarPreview.css({ display: "block" });
+          }
+        });
+
+        // Auto-dismiss alerts after 5 seconds (optional)
+        const alerts = document.querySelectorAll(".alert");
+        alerts.forEach((alert) => {
+          setTimeout(() => {
+            const bsAlert = new bootstrap.Alert(alert);
+            bsAlert.close();
+          }, 5000);
+        });
+      });
+    </script>
+  </body>
+</html>

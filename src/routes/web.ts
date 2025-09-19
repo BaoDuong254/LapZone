@@ -21,9 +21,12 @@ import {
 } from "controllers/client/auth.controller";
 import { getCartPage, getCheckOutPage, getOrderHistoryPage, getProductPage, getThanksPage, postAddProductToCart, postAddToCartFromDetailPage, postDeleteProductInCart, postHandleCartToCheckout, postPlaceOrder } from "controllers/client/product.controller";
 import {
+  getAboutPage,
   getCreateUser,
   getHomePage,
   getProductFilterPage,
+  getSupportPage,
+  getTermsPage,
   getViewUser,
   postCreateUser,
   postDeleteUser,
@@ -62,6 +65,9 @@ const webRoutes = (app: Express) => {
   router.get("/thanks", getThanksPage);
   router.get("/order-history", getOrderHistoryPage);
   router.post("/add-to-cart-from-detail-page/:id", postAddToCartFromDetailPage);
+  router.get("/about", getAboutPage);
+  router.get("/support", getSupportPage);
+  router.get("/terms", getTermsPage);
 
   // admin routes
   // User

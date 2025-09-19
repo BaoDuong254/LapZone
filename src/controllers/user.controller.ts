@@ -83,6 +83,18 @@ const getProductFilterPage = async (req: Request, res: Response) => {
   return res.render("client/product/filter.ejs", { products: data.products, totalPages: +data.totalPages, page: +currentPage });
 };
 
+const getAboutPage = async (req: Request, res: Response) => {
+  return res.render("client/about.ejs");
+}
+
+const getSupportPage = async (req: Request, res: Response) => {
+  return res.render("client/support.ejs");
+}
+
+const getTermsPage = async (req: Request, res: Response) => {
+  return res.render("client/terms.ejs");
+}
+
 export {
   getHomePage,
   getCreateUser,
@@ -91,4 +103,7 @@ export {
   getViewUser,
   postUpdateUser,
   getProductFilterPage,
+  getAboutPage,
+  getSupportPage,
+  getTermsPage,
 };

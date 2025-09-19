@@ -12,7 +12,17 @@ import {
 const getProductPage = async (req: Request, res: Response) => {
   const { id } = req.params;
   const product = await getProductById(Number(id));
-  return res.render("client/product/detail.ejs", { product: product });
+
+  // Mock categories data
+  const categories = [
+    { id: 1, name: "Gaming Laptops", totalProducts: 15 },
+    { id: 2, name: "Business Laptops", totalProducts: 12 },
+    { id: 3, name: "Student Laptops", totalProducts: 8 },
+    { id: 4, name: "Ultrabooks", totalProducts: 10 },
+    { id: 5, name: "Workstations", totalProducts: 6 },
+  ];
+
+  return res.render("client/product/detail.ejs", { product: product, categories: categories });
 };
 
 const postAddProductToCart = async (req: Request, res: Response) => {

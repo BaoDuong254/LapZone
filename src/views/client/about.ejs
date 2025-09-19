@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Về chúng tôi</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="keywords" />
+    <meta content="" name="description" />
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <!-- Libraries Stylesheet -->
+    <link href="/client/lib/lightbox/css/lightbox.min.css" rel="stylesheet" />
+    <link href="/client/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/client/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Template Stylesheet -->
+    <link href="/client/css/style.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css"
+      integrity="sha512-wJgJNTBBkLit7ymC6vvzM1EcSWeM9mmOu+1USHaRBbHkm6W9EgM0HY27+UtUaprntaYQJF75rc8gjxllKs5OIQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+
+  <body>
+    <!-- Spinner Start -->
+    <div
+      id="spinner"
+      class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50 d-flex align-items-center justify-content-center"
+    >
+      <div class="spinner-grow text-primary" role="status"></div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Navbar start -->
+    <%- include('layout/header.ejs'); -%>
+    <!-- Navbar End -->
+
+    <!-- Hero Start -->
+    <div class="container-fluid py-5 mb-5 hero-header">
+      <div class="container py-5">
+        <div class="row g-5 align-items-center">
+          <div class="col-md-12 col-lg-7">
+            <h4 class="mb-3 text-secondary">Chào mừng đến với</h4>
+            <h1 class="mb-5 display-3 text-primary">Laptopshop - Nơi công nghệ hội tụ</h1>
+            <p class="fs-5 text-dark">
+              Chúng tôi là đối tác tin cậy trong việc cung cấp các giải pháp công nghệ tiên tiến, mang đến cho bạn những
+              sản phẩm laptop chất lượng cao với dịch vụ tốt nhất.
+            </p>
+          </div>
+          <div class="col-md-12 col-lg-5">
+            <div id="carouselId" class="carousel slide position-relative" data-bs-ride="carousel">
+              <div class="carousel-inner" role="listbox">
+                <div class="carousel-item active rounded">
+                  <img src="/client/img/hero.jpg" class="img-fluid w-100 h-100 bg-secondary rounded" alt="About Us" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Hero End -->
+
+    <!-- About Story Start -->
+    <div class="container-fluid py-5">
+      <div class="container py-5">
+        <div class="row g-5 align-items-center">
+          <div class="col-lg-6">
+            <div class="row g-3">
+              <div class="col-6 text-start">
+                <img
+                  class="img-fluid rounded w-100 wow zoomIn"
+                  data-wow-delay="0.1s"
+                  src="/client/img/banner/dell-about.avif"
+                />
+              </div>
+              <div class="col-6 text-start">
+                <img
+                  class="img-fluid rounded w-75 wow zoomIn"
+                  data-wow-delay="0.3s"
+                  src="/client/img/banner/asus-about.webp"
+                  style="margin-top: 25%"
+                />
+              </div>
+              <div class="col-6 text-end">
+                <img
+                  class="img-fluid rounded w-75 wow zoomIn"
+                  data-wow-delay="0.5s"
+                  src="/client/img/banner/lenovo-about.avif"
+                />
+              </div>
+              <div class="col-6 text-end">
+                <img
+                  class="img-fluid rounded w-100 wow zoomIn"
+                  data-wow-delay="0.7s"
+                  src="/client/img/banner/acer-about.webp"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <h5 class="section-title ff-secondary text-start text-primary fw-normal">Về chúng tôi</h5>
+            <h1 class="mb-4">Câu chuyện của Laptopshop</h1>
+            <p class="mb-4">
+              Được thành lập vào năm 2020, Laptopshop bắt đầu từ một ước mơ đơn giản: mang công nghệ tiên tiến đến gần
+              hơn với người dùng Việt Nam. Với niềm đam mê công nghệ và sự hiểu biết sâu sắc về nhu cầu thị trường,
+              chúng tôi đã xây dựng một thương hiệu đáng tin cậy.
+            </p>
+            <p class="mb-4">
+              Từ một cửa hàng nhỏ, Laptopshop đã phát triển thành một trong những nhà phân phối laptop uy tín nhất tại
+              Việt Nam. Chúng tôi tự hào đã phục vụ hàng nghìn khách hàng với những sản phẩm chính hãng và dịch vụ chăm
+              sóc khách hàng tận tâm.
+            </p>
+            <div class="row g-4 mb-4">
+              <div class="col-sm-6">
+                <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                  <h1 class="flex-shrink-0 display-5 text-primary mb-0" data-toggle="counter-up">5</h1>
+                  <div class="ps-4">
+                    <p class="mb-0">Năm</p>
+                    <h6 class="text-uppercase mb-0">Kinh nghiệm</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                  <h1 class="flex-shrink-0 display-5 text-primary mb-0" data-toggle="counter-up">10000</h1>
+                  <div class="ps-4">
+                    <p class="mb-0">Khách hàng</p>
+                    <h6 class="text-uppercase mb-0">Hài lòng</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- About Story End -->
+
+    <!-- Mission & Vision Start -->
+    <div class="container-fluid py-5 bg-light">
+      <div class="container py-5">
+        <div class="text-center mx-auto mb-5" style="max-width: 700px">
+          <h1 class="display-4">Sứ mệnh & Tầm nhìn</h1>
+          <p>Định hướng phát triển bền vững và giá trị cốt lõi của Laptopshop</p>
+        </div>
+        <div class="row g-4">
+          <div class="col-lg-6">
+            <div class="bg-white rounded p-5 h-100">
+              <div class="d-flex flex-column align-items-center">
+                <div
+                  class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle mb-4"
+                  style="width: 80px; height: 80px"
+                >
+                  <i class="fas fa-bullseye text-white fs-2"></i>
+                </div>
+                <h3 class="mb-4">Sứ mệnh</h3>
+              </div>
+              <p class="mb-4">
+                Mang đến cho khách hàng những sản phẩm công nghệ chất lượng cao với giá cả hợp lý, cùng với dịch vụ chăm
+                sóc khách hàng tận tâm và chuyên nghiệp.
+              </p>
+              <ul class="list-unstyled">
+                <li class="mb-2">
+                  <i class="fas fa-check text-primary me-2"></i>Cung cấp sản phẩm chính hãng, chất lượng
+                </li>
+                <li class="mb-2"><i class="fas fa-check text-primary me-2"></i>Dịch vụ khách hàng xuất sắc</li>
+                <li class="mb-2"><i class="fas fa-check text-primary me-2"></i>Giá cả cạnh tranh, minh bạch</li>
+                <li class="mb-2"><i class="fas fa-check text-primary me-2"></i>Đổi mới không ngừng</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="bg-white rounded p-5 h-100">
+              <div class="d-flex flex-column align-items-center">
+                <div
+                  class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle mb-4"
+                  style="width: 80px; height: 80px"
+                >
+                  <i class="fas fa-eye text-white fs-2"></i>
+                </div>
+                <h3 class="mb-4">Tầm nhìn</h3>
+              </div>
+              <p class="mb-4">
+                Trở thành thương hiệu bán lẻ laptop hàng đầu Việt Nam, được khách hàng tin tưởng và đánh giá cao về chất
+                lượng sản phẩm và dịch vụ.
+              </p>
+              <ul class="list-unstyled">
+                <li class="mb-2">
+                  <i class="fas fa-star text-primary me-2"></i>Thương hiệu số 1 trong lòng khách hàng
+                </li>
+                <li class="mb-2"><i class="fas fa-star text-primary me-2"></i>Mở rộng mạng lưới toàn quốc</li>
+                <li class="mb-2"><i class="fas fa-star text-primary me-2"></i>Dẫn đầu xu hướng công nghệ</li>
+                <li class="mb-2">
+                  <i class="fas fa-star text-primary me-2"></i>Đóng góp vào sự phát triển công nghệ Việt Nam
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Mission & Vision End -->
+
+    <!-- Core Values Start -->
+    <div class="container-fluid py-5">
+      <div class="container py-5">
+        <div class="text-center mx-auto mb-5" style="max-width: 700px">
+          <h1 class="display-4">Giá trị cốt lõi</h1>
+          <p>Những nguyên tắc định hướng mọi hoạt động của chúng tôi</p>
+        </div>
+        <div class="row g-4">
+          <div class="col-lg-3 col-md-6">
+            <div class="service-item bg-light rounded h-100 p-5">
+              <div class="d-flex flex-column align-items-center">
+                <div
+                  class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle mb-4"
+                  style="width: 70px; height: 70px"
+                >
+                  <i class="fas fa-heart text-white"></i>
+                </div>
+                <h4 class="mb-3r">Tận tâm</h4>
+                <p class="mb-4 text-center">
+                  Luôn đặt khách hàng làm trọng tâm, lắng nghe và thấu hiểu nhu cầu để mang đến trải nghiệm tốt nhất.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="service-item bg-light rounded h-100 p-5">
+              <div class="d-flex flex-column align-items-center">
+                <div
+                  class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle mb-4"
+                  style="width: 70px; height: 70px"
+                >
+                  <i class="fas fa-shield-alt text-white"></i>
+                </div>
+                <h4 class="mb-3">Tin cậy</h4>
+                <p class="mb-4 text-center">
+                  Cam kết cung cấp sản phẩm chính hãng, chất lượng cao và tuân thủ mọi cam kết với khách hàng.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="service-item bg-light rounded h-100 p-5">
+              <div class="d-flex flex-column align-items-center">
+                <div
+                  class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle mb-4"
+                  style="width: 70px; height: 70px"
+                >
+                  <i class="fas fa-lightbulb text-white"></i>
+                </div>
+                <h4 class="mb-3">Sáng tạo</h4>
+                <p class="mb-4 text-center">
+                  Không ngừng đổi mới, áp dụng công nghệ tiên tiến để nâng cao chất lượng sản phẩm và dịch vụ.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="service-item bg-light rounded h-100 p-5">
+              <div class="d-flex flex-column align-items-center">
+                <div
+                  class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle mb-4"
+                  style="width: 70px; height: 70px"
+                >
+                  <i class="fas fa-handshake text-white"></i>
+                </div>
+                <h4 class="mb-3">Hợp tác</h4>
+                <p class="mb-4 text-center">
+                  Xây dựng mối quan hệ bền vững với khách hàng, đối tác và cộng đồng dựa trên sự tôn trọng lẫn nhau.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Core Values End -->
+
+    <!-- Team Start -->
+    <div class="container-fluid py-5 bg-light">
+      <div class="container py-5">
+        <div class="text-center mx-auto mb-5" style="max-width: 700px">
+          <h1 class="display-4">Đội ngũ chuyên nghiệp</h1>
+          <p>Những con người tài năng đứng sau thành công của Laptopshop</p>
+        </div>
+        <div class="row g-4">
+          <div class="col-lg-3 col-md-6">
+            <div class="team-item text-center rounded overflow-hidden">
+              <div class="rounded-circle overflow-hidden m-4">
+                <img src="/client/img/avatar.jpg" alt="" class="img-fluid" />
+              </div>
+              <h5 class="mb-0">Bao Gia Duong</h5>
+              <small>Founder & CEO</small>
+              <div class="d-flex justify-content-center mt-3">
+                <a class="btn btn-square btn-primary mx-1" href="https://portfoliobao.vercel.app/" target="_blank">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+                <a class="btn btn-square btn-primary mx-1" href="https://github.com/BaoDuong254" target="_blank">
+                  <i class="fab fa-github"></i>
+                </a>
+                <a
+                  class="btn btn-square btn-primary mx-1"
+                  href="https://www.linkedin.com/in/baoduonggia254/"
+                  target="_blank"
+                >
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="team-item text-center rounded overflow-hidden">
+              <div class="rounded-circle overflow-hidden m-4">
+                <img class="img-fluid" src="/client/img/avatar.jpg" alt="" />
+              </div>
+              <h5 class="mb-0">Nguyễn Văn A</h5>
+              <small>Giám đốc Công nghệ</small>
+              <div class="d-flex justify-content-center mt-3">
+                <a class="btn btn-square btn-primary mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
+                <a class="btn btn-square btn-primary mx-1" href="#"><i class="fab fa-twitter"></i></a>
+                <a class="btn btn-square btn-primary mx-1" href="#"><i class="fab fa-linkedin-in"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="team-item text-center rounded overflow-hidden">
+              <div class="rounded-circle overflow-hidden m-4">
+                <img class="img-fluid" src="/client/img/avatar.jpg" alt="" />
+              </div>
+              <h5 class="mb-0">Trần Thị B</h5>
+              <small>Giám đốc Bán hàng</small>
+              <div class="d-flex justify-content-center mt-3">
+                <a class="btn btn-square btn-primary mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
+                <a class="btn btn-square btn-primary mx-1" href="#"><i class="fab fa-twitter"></i></a>
+                <a class="btn btn-square btn-primary mx-1" href="#"><i class="fab fa-linkedin-in"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="team-item text-center rounded overflow-hidden">
+              <div class="rounded-circle overflow-hidden m-4">
+                <img class="img-fluid" src="/client/img/avatar.jpg" alt="" />
+              </div>
+              <h5 class="mb-0">Lê Văn C</h5>
+              <small>Trưởng phòng CSKH</small>
+              <div class="d-flex justify-content-center mt-3">
+                <a class="btn btn-square btn-primary mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
+                <a class="btn btn-square btn-primary mx-1" href="#"><i class="fab fa-twitter"></i></a>
+                <a class="btn btn-square btn-primary mx-1" href="#"><i class="fab fa-linkedin-in"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Team End -->
+
+    <!-- Achievements Start -->
+    <div class="container-fluid py-5">
+      <div class="container py-5">
+        <div class="text-center mx-auto mb-5" style="max-width: 700px">
+          <h1 class="display-4">Thành tựu đáng tự hào</h1>
+          <p>Những cột mốc quan trọng trong hành trình phát triển của chúng tôi</p>
+        </div>
+        <div class="row g-4">
+          <div class="col-lg-3 col-md-6 text-center">
+            <div class="bg-primary text-white rounded p-4">
+              <i class="fas fa-users fa-3x mb-3"></i>
+              <h2 class="display-4 fw-bold">10K+</h2>
+              <p class="mb-0">Khách hàng tin tưởng</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 text-center">
+            <div class="bg-primary text-white rounded p-4">
+              <i class="fas fa-laptop fa-3x mb-3"></i>
+              <h2 class="display-4 fw-bold">50K+</h2>
+              <p class="mb-0">Sản phẩm bán ra</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 text-center">
+            <div class="bg-primary text-white rounded p-4">
+              <i class="fas fa-store fa-3x mb-3"></i>
+              <h2 class="display-4 fw-bold">25</h2>
+              <p class="mb-0">Chi nhánh toàn quốc</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 text-center">
+            <div class="bg-primary text-white rounded p-4">
+              <i class="fas fa-award fa-3x mb-3"></i>
+              <h2 class="display-4 fw-bold">15</h2>
+              <p class="mb-0">Giải thưởng uy tín</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Achievements End -->
+
+    <!-- Why Choose Us Start -->
+    <div class="container-fluid py-5 bg-light">
+      <div class="container py-5">
+        <div class="text-center mx-auto mb-5" style="max-width: 700px">
+          <h1 class="display-4">Tại sao chọn Laptopshop?</h1>
+          <p>Những lý do khiến khách hàng tin tưởng và lựa chọn chúng tôi</p>
+        </div>
+        <div class="row g-4">
+          <div class="col-lg-6">
+            <div class="d-flex bg-white rounded p-4 mb-4">
+              <i class="fas fa-certificate text-primary fa-2x flex-shrink-0 me-4"></i>
+              <div>
+                <h5 class="mb-2">Sản phẩm chính hãng 100%</h5>
+                <p class="mb-0">
+                  Tất cả sản phẩm đều được nhập khẩu trực tiếp từ các hãng với đầy đủ tem bảo hành chính hãng.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="d-flex bg-white rounded p-4 mb-4">
+              <i class="fas fa-shipping-fast text-primary fa-2x flex-shrink-0 me-4"></i>
+              <div>
+                <h5 class="mb-2">Giao hàng nhanh chóng</h5>
+                <p class="mb-0">
+                  Hệ thống logistics hiện đại, giao hàng trong 1-2 ngày ở nội thành và 3-5 ngày toàn quốc.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="d-flex bg-white rounded p-4 mb-4">
+              <i class="fas fa-tools text-primary fa-2x flex-shrink-0 me-4"></i>
+              <div>
+                <h5 class="mb-2">Hỗ trợ kỹ thuật chuyên nghiệp</h5>
+                <p class="mb-0">
+                  Đội ngũ kỹ thuật viên giàu kinh nghiệm, hỗ trợ 24/7 để giải quyết mọi vấn đề của khách hàng.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="d-flex bg-white rounded p-4 mb-4">
+              <i class="fas fa-dollar-sign text-primary fa-2x flex-shrink-0 me-4"></i>
+              <div>
+                <h5 class="mb-2">Giá cả cạnh tranh nhất</h5>
+                <p class="mb-0">Cam kết mang đến giá tốt nhất thị trường với nhiều chương trình khuyến mãi hấp dẫn.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Why Choose Us End -->
+
+    <!-- Call to Action Start -->
+    <div class="container-fluid py-5">
+      <div class="container py-5">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-8">
+            <h2 class="display-5 mb-3">Sẵn sàng khám phá thế giới công nghệ?</h2>
+            <p class="fs-5 text-dark mb-4">
+              Hãy để Laptopshop đồng hành cùng bạn trong hành trình khám phá và chinh phục công nghệ. Chúng tôi cam kết
+              mang đến những trải nghiệm tuyệt vời nhất!
+            </p>
+          </div>
+          <div class="col-lg-4 text-lg-end">
+            <a href="/products" class="btn btn-primary py-3 px-5 fs-5">
+              <i class="fas fa-shopping-cart me-2"></i>
+              Khám phá sản phẩm
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Call to Action End -->
+
+    <!-- Footer Start -->
+    <%- include('layout/footer.ejs'); -%>
+    <!-- Footer End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"
+      ><i class="fa fa-arrow-up"></i
+    ></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/client/lib/easing/easing.min.js"></script>
+    <script src="/client/lib/waypoints/waypoints.min.js"></script>
+    <script src="/client/lib/lightbox/js/lightbox.min.js"></script>
+    <script src="/client/lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="/client/js/main.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"
+      integrity="sha512-zlWWyZq71UMApAjih4WkaRpikgY9Bz1oXIW5G0fED4vk14JjGlQ1UmkGM392jEULP8jbNMiwLWdM8Z87Hu88Fw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </body>
+</html>

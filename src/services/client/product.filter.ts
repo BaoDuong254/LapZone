@@ -1,95 +1,5 @@
 import { prisma } from "config/client";
 
-const userFilter = async (usernameInput: string) => {
-  return await prisma.user.findMany({
-    where: {
-      username: {
-        contains: usernameInput,
-      },
-    },
-  });
-};
-
-const yeucau1 = async (minPrice: number) => {
-  return await prisma.product.findMany({
-    where: {
-      price: {
-        gte: minPrice,
-      },
-    },
-  });
-};
-
-const yeucau2 = async (maxPrice: number) => {
-  return await prisma.product.findMany({
-    where: {
-      price: {
-        lte: maxPrice,
-      },
-    },
-  });
-};
-
-const yeucau3 = async (factory: string) => {
-  return await prisma.product.findMany({
-    where: {
-      factory: {
-        equals: factory,
-      },
-    },
-  });
-};
-
-const yeucau4 = async (factories: string[]) => {
-  return await prisma.product.findMany({
-    where: {
-      factory: {
-        in: factories,
-      },
-    },
-  });
-};
-
-const yeucau5 = async (minPrice: number, maxPrice: number) => {
-  return await prisma.product.findMany({
-    where: {
-      price: {
-        gte: minPrice,
-        lte: maxPrice,
-      },
-    },
-  });
-};
-
-const yeucau6 = async () => {
-  return await prisma.product.findMany({
-    where: {
-      OR: [
-        {
-          price: {
-            gte: 10000000,
-            lte: 15000000,
-          },
-        },
-        {
-          price: {
-            gte: 16000000,
-            lte: 20000000,
-          },
-        },
-      ],
-    },
-  });
-};
-
-const yeucau7 = async () => {
-  return await prisma.product.findMany({
-    orderBy: {
-      price: "asc",
-    },
-  });
-};
-
 const getProductWithFilter = async (
   page: number,
   pageSize: number,
@@ -151,4 +61,4 @@ const getProductWithFilter = async (
   return { products, totalPages };
 };
 
-export { userFilter, yeucau1, yeucau2, yeucau3, yeucau4, yeucau5, yeucau6, yeucau7, getProductWithFilter };
+export { getProductWithFilter };

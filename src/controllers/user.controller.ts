@@ -1,24 +1,7 @@
 import { Request, Response } from "express";
 import { countTotalProductClientPages, getProducts } from "services/client/item.service";
-import {
-  getProductWithFilter,
-  userFilter,
-  yeucau1,
-  yeucau2,
-  yeucau3,
-  yeucau4,
-  yeucau5,
-  yeucau6,
-  yeucau7,
-} from "services/client/product.filter";
-import {
-  getAllRoles,
-  getAllUsers,
-  getUserByID,
-  handleCreateUser,
-  handleDeleteUser,
-  updateUserByID,
-} from "services/user.service";
+import { getProductWithFilter } from "services/client/product.filter";
+import { getAllRoles, getUserByID, handleCreateUser, handleDeleteUser, updateUserByID } from "services/user.service";
 
 const getHomePage = async (req: Request, res: Response) => {
   const { page } = req.query;
@@ -80,20 +63,24 @@ const getProductFilterPage = async (req: Request, res: Response) => {
   let currentPage = page ? +page : 1;
   if (currentPage < 1) currentPage = 1;
   const data = await getProductWithFilter(currentPage, 6, factory, target, price, sort);
-  return res.render("client/product/filter.ejs", { products: data.products, totalPages: +data.totalPages, page: +currentPage });
+  return res.render("client/product/filter.ejs", {
+    products: data.products,
+    totalPages: +data.totalPages,
+    page: +currentPage,
+  });
 };
 
 const getAboutPage = async (req: Request, res: Response) => {
   return res.render("client/about.ejs");
-}
+};
 
 const getSupportPage = async (req: Request, res: Response) => {
   return res.render("client/support.ejs");
-}
+};
 
 const getTermsPage = async (req: Request, res: Response) => {
   return res.render("client/terms.ejs");
-}
+};
 
 export {
   getHomePage,

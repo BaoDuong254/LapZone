@@ -230,6 +230,18 @@
                       <i class="fas fa-user-edit me-2"></i>Cập nhật thông tin
                     </button>
                   </li>
+                  <li class="nav-item" role="presentation">
+                    <button
+                      class="nav-link"
+                      id="password-tab"
+                      data-bs-toggle="tab"
+                      data-bs-target="#password"
+                      type="button"
+                      role="tab"
+                    >
+                      <i class="fas fa-key me-2"></i>Đổi mật khẩu
+                    </button>
+                  </li>
                 </ul>
               </div>
 
@@ -288,7 +300,9 @@
                           name="address"
                           placeholder="Địa chỉ"
                           style="height: 100px"
-                        ><%= oldProfileData?.address || user?.address || '' %></textarea>
+                        >
+<%= oldProfileData?.address || user?.address || '' %></textarea
+                        >
                         <label for="address"><i class="fas fa-map-marker-alt me-2"></i>Địa chỉ</label>
                       </div>
                     </div>
@@ -303,6 +317,74 @@
                     <div class="text-end">
                       <button type="submit" class="btn btn-update text-white">
                         <i class="fas fa-save me-2"></i>Cập nhật thông tin
+                      </button>
+                    </div>
+                  </form>
+                </div>
+
+                <!-- Change Password Tab -->
+                <div class="tab-pane fade" id="password" role="tabpanel">
+                  <h5 class="mb-4 text-primary"><i class="fas fa-key me-2"></i>Đổi mật khẩu</h5>
+
+                  <!-- Password Errors -->
+                  <% if (passwordErrors && passwordErrors.length > 0) { %>
+                  <div class="alert alert-danger">
+                    <ul class="mb-0">
+                      <% passwordErrors.forEach(error => { %>
+                      <li><%= error %></li>
+                      <% }) %>
+                    </ul>
+                  </div>
+                  <% } %>
+
+                  <form method="POST" action="/account/change-password">
+                    <div class="mb-3">
+                      <div class="form-floating">
+                        <input
+                          type="password"
+                          class="form-control"
+                          id="currentPassword"
+                          name="currentPassword"
+                          placeholder="Mật khẩu hiện tại"
+                          required
+                        />
+                        <label for="currentPassword"><i class="fas fa-lock me-2"></i>Mật khẩu hiện tại</label>
+                      </div>
+                    </div>
+
+                    <div class="mb-3">
+                      <div class="form-floating">
+                        <input
+                          type="password"
+                          class="form-control"
+                          id="newPassword"
+                          name="newPassword"
+                          placeholder="Mật khẩu mới"
+                          required
+                        />
+                        <label for="newPassword"><i class="fas fa-key me-2"></i>Mật khẩu mới</label>
+                      </div>
+                    </div>
+
+                    <div class="mb-3">
+                      <div class="form-floating">
+                        <input
+                          type="password"
+                          class="form-control"
+                          id="confirmNewPassword"
+                          name="confirmNewPassword"
+                          placeholder="Xác nhận mật khẩu mới"
+                          required
+                        />
+                        <label for="confirmNewPassword"
+                          ><i class="fas fa-check-circle me-2"></i>Xác nhận mật khẩu mới</label
+                        >
+                      </div>
+                    </div>
+
+                    <div class="text-end">
+                      <button type="submit" class="btn btn-update text-white">
+                        <i class="fas fa-save me-2"></i>Đổi mật khẩu
                       </button>
                     </div>
                   </form>
@@ -351,13 +433,19 @@
         });
 
         // Auto-dismiss alerts after 5 seconds (optional)
-        const alerts = document.querySelectorAll(".alert");
-        alerts.forEach((alert) => {
-          setTimeout(() => {
-            const bsAlert = new bootstrap.Alert(alert);
-            bsAlert.close();
-          }, 5000);
-        });
+        // const alerts = document.querySelectorAll(".alert");
+        // alerts.forEach((alert) => {
+        //   setTimeout(() => {
+        //     const bsAlert = new bootstrap.Alert(alert);
+        //     bsAlert.close();
+        //   }, 5000);
+        // });
+
+        // Show password tab if there are password errors
+        if (document.querySelector("#password .alert-danger")) {
+          const passwordTab = new bootstrap.Tab(document.querySelector("#password-tab"));
+          passwordTab.show();
+        }
       });
     </script>
   </body>

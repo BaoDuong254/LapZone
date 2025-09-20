@@ -52,4 +52,39 @@ const updateUserProfile = async (
   return updatedUser;
 };
 
-export { getUserProfile, updateUserProfile };
+// Change user password
+const changeUserPassword = async (userId: number, currentPassword: string, newPassword: string) => {
+  // Get current user with password
+  const user = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+  });
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  // Verify current password
+  const isCurrentPasswordValid = await comparePassword(currentPassword, user.password);
+  if (!isCurrentPasswordValid) {
+    throw new Error("Current password is incorrect");
+  }
+
+  // Hash new password
+  const hashedNewPassword = await hashPassword(newPassword);
+
+  // Update password in database
+  const updatedUser = await prisma.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      password: hashedNewPassword,
+    },
+  });
+
+  return updatedUser;
+};
+
+export { getUserProfile, updateUserProfile, changeUserPassword };

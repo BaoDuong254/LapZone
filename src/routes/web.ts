@@ -19,7 +19,7 @@ import {
   postLogout,
   postRegister,
 } from "controllers/client/auth.controller";
-import { getAccountPage, postUpdateProfile } from "controllers/client/account.controller";
+import { getAccountPage, postUpdateProfile, postChangePassword } from "controllers/client/account.controller";
 import {
   getCartPage,
   getCheckOutPage,
@@ -84,6 +84,7 @@ const webRoutes = (app: Express) => {
   // Account management routes
   router.get("/account", getAccountPage);
   router.post("/account/update-profile", fileUploadMiddleware("avatar"), postUpdateProfile);
+  router.post("/account/change-password", postChangePassword);
 
   // admin routes
   // User

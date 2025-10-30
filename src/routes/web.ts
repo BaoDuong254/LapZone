@@ -46,8 +46,8 @@ import {
 } from "controllers/user.controller";
 import express, { Express } from "express";
 import passport from "passport";
-import { isAdmin } from "src/middlewares/auth";
-import fileUploadMiddleware from "src/middlewares/multer";
+import { isAdmin } from "middlewares/auth";
+import fileUploadMiddleware from "middlewares/multer";
 const router = express.Router();
 
 const webRoutes = (app: Express) => {

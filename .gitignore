@@ -139,5 +139,3 @@ dist
 .svelte-kit
 
 .DS_Store
-
-/src/generated/prisma

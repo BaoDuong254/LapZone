@@ -8,7 +8,7 @@
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
     "module": "commonjs",
-    "target": "es6",
+    "target": "ES6",
     // For nodejs:
     "lib": ["esnext"],
     "types": ["node"],
@@ -32,6 +32,7 @@
     // "noPropertyAccessFromIndexSignature": true,
 
     // Recommended Options
+    "esModuleInterop": true,
     "strict": true,
     "jsx": "react-jsx",
     "verbatimModuleSyntax": false,
@@ -40,16 +41,14 @@
     "moduleDetection": "force",
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "esModuleInterop": true,
-    "baseUrl": ".",
     "paths": {
       "config/*": ["./src/config/*"],
       "controllers/*": ["./src/controllers/*"],
       "models/*": ["./src/models/*"],
       "routes/*": ["./src/routes/*"],
       "services/*": ["./src/services/*"],
-      "generated/*": ["./src/generated/*"],
       "validation/*": ["./src/validation/*"],
+      "middlewares/*": ["./src/middlewares/*"],
     },
   }
 }

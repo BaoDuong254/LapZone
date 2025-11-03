@@ -52,6 +52,5 @@
       "generated/*": ["./src/generated/*"]
     }
   },
-  "files": ["./src/type.d.ts"], // Path to custom type definitions
   "include": ["./src/**/*"] // Path to source code
 }

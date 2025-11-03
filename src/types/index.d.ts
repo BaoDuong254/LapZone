@@ -6,7 +6,6 @@ declare global {
     interface User extends UserPrisma {
       role?: Role;
       sumCart?: number;
-      heello?: string;
     }
   }
 }

@@ -1,4 +1,3 @@
-import { error } from "console";
 import { isEmailExist } from "services/client/auth.service";
 import z from "zod";
 

@@ -96,6 +96,7 @@ const updateUserByID = async (
       ...(avatar && { avatar: avatar }),
     },
   });
+  return updateUser;
 };
 
 export {

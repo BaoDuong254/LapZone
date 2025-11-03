@@ -186,20 +186,21 @@ const handlePlaceOrder = async (
         // Update product quantity and sold
         for (let i = 0; i < cart.cartDetails.length; i++) {
           const productId = cart.cartDetails[i]?.productId;
+          const cartDetailQuantity = cart.cartDetails[i]?.quantity ?? 0;
           const product = await tx.product.findUnique({
             where: { id: productId! },
           });
-          if (!product || product.quantity < cart.cartDetails[i]?.quantity!) {
+          if (!product || product.quantity < cartDetailQuantity) {
             throw new Error(`Product ${product?.name} is out of stock`);
           }
           await tx.product.update({
             where: { id: productId! },
             data: {
               quantity: {
-                decrement: cart.cartDetails[i]?.quantity!,
+                decrement: cart.cartDetails[i]?.quantity ?? 0,
               },
               sold: {
-                increment: cart.cartDetails[i]?.quantity!,
+                increment: cart.cartDetails[i]?.quantity ?? 0,
               },
             },
           });

@@ -39,7 +39,7 @@ const getViewUser = async (req: Request, res: Response) => {
 };
 
 const postUpdateUser = async (req: Request, res: Response) => {
-  const { fullname, username, phone, role, address, id } = req.body;
+  const { fullname, phone, role, address, id } = req.body;
   const file = req.file;
   const avatar = file ? file.filename : "";
   await updateUserByID(id, fullname, phone, role, address, avatar);

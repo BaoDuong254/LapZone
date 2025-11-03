@@ -8,7 +8,7 @@ const getProductWithFilter = async (
   price: string,
   sort: string
 ) => {
-  let whereClause: any = {};
+  const whereClause: any = {};
   if (factory) {
     const factoryInput = factory.split(",");
     whereClause.factory = {

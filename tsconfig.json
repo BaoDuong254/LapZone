@@ -52,5 +52,6 @@
       "generated/*": ["./src/generated/*"]
     }
   },
+  "files": ["./src/types/index.d.ts"], // Path to type declaration files
   "include": ["./src/**/*"] // Path to source code
 }

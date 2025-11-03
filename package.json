@@ -4,7 +4,9 @@
   "description": "",
   "main": "dist/app.js",
   "scripts": {
-    "build": "rimraf ./dist && prisma generate && tsc && tsc-alias",
+    "clean": "rimraf dist/",
+    "copy-files": "copyfiles -u 1 src/generated/**/* src/views/**/* dist/",
+    "build": "npm run clean && tsc && npm run copy-files && tsc-alias",
     "start": "node dist/app.js",
     "dev": "nodemon",
     "start:debug": "nodemon --inspect=9229 -e ts,tsx --exec node -r ts-node/register -r tsconfig-paths/register ./src/app.ts"
@@ -52,7 +54,8 @@
   "devDependencies": {
     "@prisma/client": "^6.18.0",
     "@types/express-session": "^1.18.2",
+    "copyfiles": "^2.4.1",
     "prisma": "^6.18.0",
-    "rimraf": "^6.0.1"
+    "rimraf": "^6.1.0"
   }
 }

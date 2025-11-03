@@ -8,7 +8,7 @@ import passport from "passport";
 import configPassportLocal from "middlewares/passport.local";
 import session from "express-session";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "generated/prisma";
 import apiRoutes from "routes/api";
 import path from "path";
 const app = express();
@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // set view engine
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "../views"));
+app.set("views", path.join(__dirname, "views"));
 
 // config session for passport
 app.use(

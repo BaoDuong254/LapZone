@@ -1,4 +1,4 @@
-import { Role, User as UserPrisma } from "@prisma/client";
+import { Role, User as UserPrisma } from "generated/prisma";
 import "express-session";
 
 declare global {

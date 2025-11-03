@@ -9,6 +9,10 @@
     "build": "npm run clean && tsc && npm run copy-files && tsc-alias",
     "start": "node dist/app.js",
     "dev": "nodemon",
+    "lint": "eslint . ",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write .",
     "debug": "nodemon --inspect=9229 -e ts,tsx --exec node -r ts-node/register -r tsconfig-paths/register ./src/app.ts"
   },
   "nodemonConfig": {
@@ -55,6 +59,7 @@
     "@prisma/client": "^6.18.0",
     "@types/express-session": "^1.18.2",
     "copyfiles": "^2.4.1",
+    "prettier": "^3.6.2",
     "prisma": "^6.18.0",
     "rimraf": "^6.1.0"
   }

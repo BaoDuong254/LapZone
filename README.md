@@ -1,6 +1,7 @@
 # LapZone - Laptop E-commerce Platform
 
 A full-stack laptop e-commerce web application built with Node.js, Express, TypeScript, and MySQL. LapZone specializes in selling laptops with a comprehensive product catalog, user-friendly shopping experience, and powerful admin management system.
+
 > Live demo: [LapZone Live Demo](https://drive.google.com/file/d/1IFBG-zSlu2_rJfQ9PYC3kOh3RrgVWJXO/view?usp=sharing)
 
 ## Features

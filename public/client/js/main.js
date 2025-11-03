@@ -388,7 +388,7 @@
   function isLogin() {
     const navElements = $("#navbarCollapse");
     const childLogin = navElements.find("a.a-login");
-    if (childLogin>0) {
+    if (childLogin > 0) {
       return false;
     }
     return true;

@@ -61,4 +61,11 @@ const updateProductById = async (
   });
 };
 
-export { createProduct, getProductList, handleDeleteProduct, getProductById, updateProductById, countTotalProductsPages };
+export {
+  createProduct,
+  getProductList,
+  handleDeleteProduct,
+  getProductById,
+  updateProductById,
+  countTotalProductsPages,
+};

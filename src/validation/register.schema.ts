@@ -41,4 +41,3 @@ export const RegisterSchema = z
   });
 
 export type TRegisterSchema = z.infer<typeof RegisterSchema>;
-

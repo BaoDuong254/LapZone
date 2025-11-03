@@ -51,7 +51,7 @@ const countTotalUsersPages = async () => {
   const totalItems = await prisma.user.count();
   const totalPages = Math.ceil(totalItems / pageSize);
   return totalPages;
-}
+};
 
 const getAllRoles = async () => {
   const roles = await prisma.role.findMany();

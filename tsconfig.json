@@ -50,6 +50,6 @@
       "validation/*": ["./src/validation/*"],
       "middlewares/*": ["./src/middlewares/*"],
       "generated/*": ["./src/generated/*"]
-    },
+    }
   }
 }

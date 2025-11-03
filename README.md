@@ -139,7 +139,7 @@ The application uses the following main entities:
    **Production mode:**
 
    ```bash
-   npm start
+   npm run start
    ```
 
 7. **Access the application**

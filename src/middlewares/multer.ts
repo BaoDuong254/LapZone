@@ -1,8 +1,9 @@
 import multer from "multer";
 import path from "path";
 import { v4 } from "uuid";
+import type { RequestHandler } from "express";
 
-const fileUploadMiddleware = (fieldName: string, dir: string = "images") => {
+const fileUploadMiddleware = (fieldName: string, dir: string = "images"): RequestHandler => {
   return multer({
     storage: multer.diskStorage({
       destination: "public/" + dir,

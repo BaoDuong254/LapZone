@@ -3,31 +3,28 @@ FROM node:24-alpine AS builder
 
 WORKDIR /app
 
-# Install pnpm
-RUN corepack enable && corepack prepare pnpm@10.27.0 --activate
-
 # Install OpenSSL for Prisma
 RUN apk add --no-cache openssl
 
 # Copy package files
-COPY package.json pnpm-lock.yaml* ./
+COPY package.json package-lock.json* ./
 COPY tsconfig*.json ./
 COPY prisma.config.ts ./
 
 # Install dependencies
-RUN pnpm install --frozen-lockfile || pnpm install
+RUN npm ci || npm install
 
 # Copy Prisma schema and generate client
 COPY prisma ./prisma
 ENV DATABASE_URL="mysql://root:dummy@localhost:3306/dummy"
-RUN pnpm exec prisma generate
+RUN npx prisma generate
 
 # Copy source code
 COPY src ./src
 
 # Build the application
 ENV NODE_OPTIONS="--max-old-space-size=4096"
-RUN pnpm run build
+RUN npm run build
 
 # Production stage
 FROM node:24-alpine
@@ -37,15 +34,12 @@ WORKDIR /app
 # Install OpenSSL for Prisma and wget for healthcheck
 RUN apk add --no-cache openssl wget mysql-client
 
-# Install pnpm
-RUN corepack enable && corepack prepare pnpm@10.27.0 --activate
-
 # Copy package files
-COPY package.json pnpm-lock.yaml* ./
+COPY package.json package-lock.json* ./
 COPY prisma.config.ts ./
 
 # Install production dependencies
-RUN pnpm install --frozen-lockfile --prod || pnpm install --prod
+RUN npm ci --omit=dev || npm install --omit=dev
 
 # Copy Prisma schema
 COPY prisma ./prisma

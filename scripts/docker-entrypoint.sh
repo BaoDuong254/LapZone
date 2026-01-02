@@ -14,7 +14,7 @@ echo "✅ Database is ready!"
 
 # Run Prisma migrations
 echo "🔄 Running database migrations..."
-pnpm exec prisma migrate deploy
+npx prisma migrate deploy
 
 # Start the application (seed sẽ tự động chạy trong app.ts)
 echo "🎉 Starting Express server..."

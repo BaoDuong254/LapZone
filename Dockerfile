@@ -19,6 +19,7 @@ RUN pnpm install --frozen-lockfile || pnpm install
 
 # Copy Prisma schema and generate client
 COPY prisma ./prisma
+ENV DATABASE_URL="mysql://root:dummy@localhost:3306/dummy"
 RUN pnpm exec prisma generate
 
 # Copy source code

@@ -44,11 +44,11 @@ RUN npm ci --omit=dev || npm install --omit=dev
 # Copy Prisma schema
 COPY prisma ./prisma
 
-# Copy built application from builder
-COPY --from=builder /app/dist ./dist
-
 # Copy generated Prisma client from builder
 COPY --from=builder /app/src/generated ./dist/generated
+
+# Copy Prisma schema (runtime)
+COPY prisma ./prisma
 
 # Copy public assets
 COPY public ./public

@@ -1,0 +1,106 @@
+name: Deploy Production
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create .env file
+        run: echo "${{ secrets.ENV_FILE }}" > .env
+
+      - name: Create root .env file for docker-compose
+        run: |
+          echo "DB_PASS=${{ secrets.DB_PASS }}" > .env.compose
+          echo "DB_USER=${{ secrets.DB_USER }}" >> .env.compose
+          echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env.compose
+          echo "DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}" >> .env.compose
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Build and push app image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/lapzone:latest
+          cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/lapzone:buildcache
+          cache-to: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/lapzone:buildcache,mode=max
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build-and-push
+    steps:
+      - name: Checkout code for docker-compose
+        uses: actions/checkout@v4
+
+      - name: Create .env file
+        run: echo "${{ secrets.ENV_FILE }}" > .env
+
+      - name: Create root .env file for docker-compose
+        run: |
+          echo "DB_PASS=${{ secrets.DB_PASS }}" > .env.compose
+          echo "DB_USER=${{ secrets.DB_USER }}" >> .env.compose
+          echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env.compose
+          echo "DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}" >> .env.compose
+
+      - name: Copy files to VPS
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST_VPS }}
+          username: ${{ secrets.USERNAME_VPS }}
+          key: ${{ secrets.KEY_VPS }}
+          port: ${{ secrets.PORT_VPS }}
+          source: ".env,.env.compose,docker-compose.yml"
+          target: "~/lapzone"
+
+      - name: Deploy to VPS via SSH
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ secrets.HOST_VPS }}
+          username: ${{ secrets.USERNAME_VPS }}
+          key: ${{ secrets.KEY_VPS }}
+          port: ${{ secrets.PORT_VPS }}
+          script: |
+            cd ~/lapzone
+
+            # Rename .env.compose to use with docker-compose
+            mv .env.compose .env.docker
+
+            # Login to Docker Hub
+            echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+
+            # Load environment variables for docker-compose
+            export $(cat .env.docker | xargs)
+
+            # Stop and remove old containers first
+            docker compose down
+
+            # Pull latest images
+            docker compose pull
+
+            # Start containers with new images
+            docker compose up -d
+
+            # Clean up unused images
+            docker image prune -af
+
+            # Show running containers
+            docker compose ps

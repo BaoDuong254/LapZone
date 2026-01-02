@@ -1,0 +1,83 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: lapzone-db
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASS}
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASS}
+    volumes:
+      - db-data:/var/lib/mysql
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "localhost",
+          "-u",
+          "root",
+          "-p${DB_PASS}",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - lapzone-network
+
+  app:
+    image: ${DOCKERHUB_USERNAME}/lapzone:latest
+    container_name: lapzone-app
+    restart: unless-stopped
+    ports:
+      - "4011:3000"
+    env_file:
+      - .env
+    volumes:
+      - ./public/images:/app/public/images
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:3000",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - lapzone-network
+
+  adminer:
+    image: adminer:latest
+    container_name: lapzone-adminer
+    restart: unless-stopped
+    environment:
+      - ADMINER_DEFAULT_SERVER=db
+      - ADMINER_DESIGN=nette
+    ports:
+      - "8085:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - lapzone-network
+
+networks:
+  lapzone-network:
+    driver: bridge
+
+volumes:
+  db-data:
+    driver: local

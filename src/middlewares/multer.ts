@@ -13,7 +13,7 @@ const fileUploadMiddleware = (fieldName: string, dir: string = "images") => {
     limits: {
       fileSize: 1024 * 1024 * 3, // 3MB
     },
-    fileFilter: (req: Express.Request, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
+    fileFilter: (req, file, cb) => {
       if (file.mimetype === "image/png" || file.mimetype === "image/jpg" || file.mimetype === "image/jpeg") {
         cb(null, true);
       } else {

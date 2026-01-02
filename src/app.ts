@@ -6,9 +6,10 @@ import passport from "passport";
 import configPassportLocal from "middlewares/passport.local";
 import session from "express-session";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
-import { PrismaClient } from "generated/prisma";
 import apiRoutes from "routes/api";
 import path from "path";
+import envConfig from "config/env";
+import { prisma } from "config/client";
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -26,10 +27,10 @@ app.use(
     cookie: {
       maxAge: 7 * 24 * 60 * 60 * 1000, // ms
     },
-    secret: "a santa at nasa",
+    secret: envConfig.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: new PrismaSessionStore(new PrismaClient(), {
+    store: new PrismaSessionStore(prisma, {
       checkPeriod: 1 * 24 * 60 * 60 * 1000, // 1 day
       dbRecordIdIsSessionId: true,
     }),
@@ -41,7 +42,6 @@ app.use(passport.initialize());
 app.use(passport.authenticate("session"));
 configPassportLocal();
 
-// config static files (phải được đặt trước routes)
 app.use(express.static("public"));
 
 // Make user object available in all views

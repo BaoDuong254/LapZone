@@ -6,6 +6,7 @@ import eslintPluginPrettier from "eslint-plugin-prettier";
 
 export default defineConfig([
   globalIgnores(["dist", "node_modules", "prisma", "src/generated", "public"]),
+  ...tseslint.configs.recommended,
   {
     files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
     plugins: {
@@ -17,7 +18,7 @@ export default defineConfig([
       globals: globals.node,
     },
     rules: {
-      "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-unused-vars": "warn",
       "prettier/prettier": [
         "warn",
@@ -35,5 +36,4 @@ export default defineConfig([
       ],
     },
   },
-  tseslint.configs.recommended,
 ]);

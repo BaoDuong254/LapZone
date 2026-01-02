@@ -4,6 +4,7 @@ import "express-session";
 declare global {
   namespace Express {
     interface User extends UserPrisma {
+      id: number;
       role?: Role;
       sumCart?: number;
     }

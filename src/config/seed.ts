@@ -1,6 +1,7 @@
 import { prisma } from "config/client";
 import { hashPassword } from "services/user.service";
 import { ACCOUNT_TYPE } from "config/constants";
+import envConfig from "config/env";
 
 const initDatabase = async () => {
   const countUser = await prisma.user.count();
@@ -24,6 +25,7 @@ const initDatabase = async () => {
 
   if (countUser === 0) {
     const defaultPassword = await hashPassword("123456");
+    const adminPassword = await hashPassword(envConfig.ADMIN_PASSWORD);
     const adminRole = await prisma.role.findFirst({
       where: { name: "ADMIN" },
     });
@@ -34,9 +36,9 @@ const initDatabase = async () => {
       await prisma.user.createMany({
         data: [
           {
-            fullName: "Admin",
-            username: "admin@gmail.com",
-            password: defaultPassword,
+            fullName: envConfig.ADMIN_NAME,
+            username: envConfig.ADMIN_EMAIL,
+            password: adminPassword,
             accountType: ACCOUNT_TYPE.SYSTEM,
             roleId: adminRole.id,
           },

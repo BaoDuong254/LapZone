@@ -20,7 +20,7 @@ const getProductById = async (id: number) => {
   });
 };
 
-const addProductToCart = async (quantity: number, productId: number, user: Express.User) => {
+const addProductToCart = async (quantity: number, productId: number, user: { id: number }) => {
   const cart = await prisma.cart.findUnique({
     where: { userId: user.id },
   });

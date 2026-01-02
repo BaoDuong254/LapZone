@@ -21,17 +21,16 @@ echo "🔍 Debug: DB_PASS length: ${#DB_PASS}"
 echo "⏳ Waiting for MySQL database to be ready..."
 MAX_TRIES=60
 TRIES=0
-until mysql -h"$DB_HOST" -P"$DB_PORT" -u"$DB_USER" -p"$DB_PASS" "$DB_NAME" -e "SELECT 1" 2>&1; do
+until mysql -h"$DB_HOST" -P"$DB_PORT" -u"$DB_USER" -p"$DB_PASS" --skip-ssl "$DB_NAME" -e "SELECT 1" > /dev/null 2>&1; do
   TRIES=$((TRIES+1))
   if [ $TRIES -ge $MAX_TRIES ]; then
     echo "❌ Failed to connect to database after $MAX_TRIES attempts"
-    echo "🔍 Last error output above"
-    echo "🔍 Testing network connectivity..."
-    nc -zv "$DB_HOST" "$DB_PORT" || echo "❌ Cannot reach $DB_HOST:$DB_PORT"
+    echo "🔍 Testing with full error output:"
+    mysql -h"$DB_HOST" -P"$DB_PORT" -u"$DB_USER" -p"$DB_PASS" --skip-ssl "$DB_NAME" -e "SELECT 1"
     exit 1
   fi
-  if [ $TRIES -eq 1 ]; then
-    echo "🔍 First connection attempt error (will retry silently):"
+  if [ $((TRIES % 10)) -eq 1 ]; then
+    echo "⏳ Waiting for database... (attempt $TRIES/$MAX_TRIES)"
   fi
   sleep 2
 done

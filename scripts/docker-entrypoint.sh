@@ -7,12 +7,12 @@ echo "🚀 Starting LapZone application..."
 echo "⏳ Waiting for MySQL database to be ready..."
 MAX_TRIES=60
 TRIES=0
-until mysql -h "$DB_HOST" -P "$DB_PORT" -u "$DB_USER" -p"$DB_PASS" "$DB_NAME" -e "SELECT 1" > /dev/null 2>&1; do
+until mariadb -h "$DATABASE_HOST" -P "$DATABASE_PORT" -u "$DATABASE_USER" -p"$DATABASE_PASSWORD" "$DATABASE_NAME" -e "SELECT 1" > /dev/null 2>&1; do
   TRIES=$((TRIES+1))
   if [ $TRIES -ge $MAX_TRIES ]; then
     echo "❌ Failed to connect to database after $MAX_TRIES attempts"
     echo "🔍 Testing with full error output:"
-    mysql -h "$DB_HOST" -P "$DB_PORT" -u "$DB_USER" -p"$DB_PASS" "$DB_NAME" -e "SELECT 1"
+    mariadb -h "$DATABASE_HOST" -P "$DATABASE_PORT" -u "$DATABASE_USER" -p"$DATABASE_PASSWORD" "$DATABASE_NAME" -e "SELECT 1"
     exit 1
   fi
   if [ $((TRIES % 10)) -eq 1 ]; then

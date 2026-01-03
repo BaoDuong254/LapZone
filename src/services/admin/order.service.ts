@@ -1,4 +1,4 @@
-import { prisma } from "config/client";
+import { prisma } from "config/database";
 import { TOTAL_ITEMS_PER_PAGE } from "config/constants";
 
 const getOrderAdmin = async (page: number) => {

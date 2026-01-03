@@ -9,7 +9,7 @@ import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import apiRoutes from "routes/api";
 import path from "path";
 import envConfig from "config/env";
-import { prisma } from "config/client";
+import { prisma } from "config/database";
 const app = express();
 const port = process.env.PORT || 3000;
 

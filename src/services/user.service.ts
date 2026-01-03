@@ -1,4 +1,4 @@
-import { prisma } from "config/client";
+import { prisma } from "config/database";
 import { ACCOUNT_TYPE, TOTAL_ITEMS_PER_PAGE } from "config/constants";
 import bcrypt from "bcrypt";
 const saltRounds = 10;

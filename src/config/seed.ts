@@ -1,4 +1,4 @@
-import { prisma } from "config/client";
+import { prisma } from "config/database";
 import { hashPassword } from "services/user.service";
 import { ACCOUNT_TYPE } from "config/constants";
 import envConfig from "config/env";

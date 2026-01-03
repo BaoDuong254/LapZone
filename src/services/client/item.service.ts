@@ -1,4 +1,4 @@
-import { prisma } from "config/client";
+import { prisma } from "config/database";
 
 const getProducts = async (page: number, pageSize: number) => {
   const skip = (page - 1) * pageSize;

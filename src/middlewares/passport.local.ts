@@ -1,4 +1,4 @@
-import { prisma } from "config/client";
+import { prisma } from "config/database";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { getUserSumCart, getUserWithRoleByID } from "services/client/auth.service";
@@ -33,6 +33,7 @@ const configPassportLocal = () => {
       }
     )
   );
+
   passport.serializeUser(function (user: any, cb) {
     cb(null, { id: user.id, username: user.username });
   });

@@ -1,4 +1,4 @@
-import { prisma } from "config/client";
+import { prisma } from "config/database";
 import { comparePassword, hashPassword } from "services/user.service";
 
 // Get user profile by ID

@@ -5,7 +5,7 @@
   "main": "dist/app.js",
   "scripts": {
     "clean": "rimraf dist/",
-    "copy-files": "copyfiles -u 1 src/generated/**/* src/views/**/* dist/",
+    "copy-files": "copyfiles -u 1 -a \"src/generated/**/*\" \"src/views/**/*\" dist/",
     "build": "npm run clean && tsc && npm run copy-files && tsc-alias",
     "start": "node dist/app.js",
     "dev": "nodemon",

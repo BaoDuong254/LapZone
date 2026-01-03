@@ -1,12 +1,11 @@
 services:
   db:
-    image: mysql:8.0
+    image: mysql
     container_name: lapzone-db
     restart: unless-stopped
-    command: --default-authentication-plugin=mysql_native_password
     environment:
-      - MYSQL_ROOT_PASSWORD=${DB_PASS}
-      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_ROOT_PASSWORD=${DATABASE_PASSWORD}
+      - MYSQL_DATABASE=${DATABASE_NAME}
     volumes:
       - db-data:/var/lib/mysql
     healthcheck:
@@ -19,7 +18,7 @@ services:
           "localhost",
           "-u",
           "root",
-          "-p${DB_PASS}",
+          "-p${DATABASE_PASSWORD}",
         ]
       interval: 10s
       timeout: 5s

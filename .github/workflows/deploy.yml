@@ -18,13 +18,6 @@ jobs:
       - name: Create .env file
         run: echo "${{ secrets.ENV_FILE }}" > .env
 
-      - name: Create root .env file for docker-compose
-        run: |
-          echo "DB_PASS=${{ secrets.DB_PASS }}" > .env.compose
-          echo "DB_USER=${{ secrets.DB_USER }}" >> .env.compose
-          echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env.compose
-          echo "DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}" >> .env.compose
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -54,13 +47,6 @@ jobs:
       - name: Create .env file
         run: echo "${{ secrets.ENV_FILE }}" > .env
 
-      - name: Create root .env file for docker-compose
-        run: |
-          echo "DB_PASS=${{ secrets.DB_PASS }}" > .env.compose
-          echo "DB_USER=${{ secrets.DB_USER }}" >> .env.compose
-          echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env.compose
-          echo "DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}" >> .env.compose
-
       - name: Copy files to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -68,7 +54,7 @@ jobs:
           username: ${{ secrets.USERNAME_VPS }}
           key: ${{ secrets.KEY_VPS }}
           port: ${{ secrets.PORT_VPS }}
-          source: ".env,.env.compose,docker-compose.yml"
+          source: ".env,docker-compose.yml"
           target: "~/lapzone"
 
       - name: Deploy to VPS via SSH
@@ -81,14 +67,14 @@ jobs:
           script: |
             cd ~/lapzone
 
-            # Rename .env.compose to use with docker-compose
-            mv .env.compose .env.docker
-
             # Login to Docker Hub
             echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
-            # Load environment variables for docker-compose
-            export $(cat .env.docker | xargs)
+            # Set environment variables for docker-compose
+            export DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}
+            export DATABASE_PASSWORD=${{ secrets.DB_PASS }}
+            export DATABASE_USER=${{ secrets.DB_USER }}
+            export DATABASE_NAME=${{ secrets.DB_NAME }}
 
             # Stop and remove old containers first
             docker compose down

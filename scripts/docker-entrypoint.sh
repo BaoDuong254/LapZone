@@ -3,20 +3,6 @@ set -e
 
 echo "🚀 Starting LapZone application..."
 
-# Set default values from DATABASE_URL or use individual variables
-DB_HOST="${DATABASE_HOST:-db}"
-DB_PORT="${DATABASE_PORT:-3306}"
-DB_USER="${DATABASE_USER:-root}"
-DB_PASS="${DATABASE_PASSWORD}"
-DB_NAME="${DATABASE_NAME:-lapzone}"
-
-# Debug environment variables
-echo "🔍 Debug: DB_HOST=$DB_HOST"
-echo "🔍 Debug: DB_PORT=$DB_PORT"
-echo "🔍 Debug: DB_USER=$DB_USER"
-echo "🔍 Debug: DB_NAME=$DB_NAME"
-echo "🔍 Debug: DB_PASS length: ${#DB_PASS}"
-
 # Wait for database to be ready
 echo "⏳ Waiting for MySQL database to be ready..."
 MAX_TRIES=60
@@ -41,6 +27,6 @@ echo "✅ Database is ready!"
 echo "🔄 Running database migrations..."
 npx prisma migrate deploy
 
-# Start the application (seed sẽ tự động chạy trong app.ts)
+# Start the application
 echo "🎉 Starting Express server..."
 exec node dist/app.js

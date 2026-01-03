@@ -12,7 +12,7 @@ COPY tsconfig*.json ./
 COPY prisma.config.ts ./
 
 # Install dependencies
-RUN npm ci || npm install
+RUN npm ci
 
 # Copy Prisma schema and generate client
 COPY prisma ./prisma
@@ -39,19 +39,16 @@ COPY package.json package-lock.json* ./
 COPY prisma.config.ts ./
 
 # Install production dependencies
-RUN npm ci --omit=dev || npm install --omit=dev
+RUN npm ci --omit=dev
 
 # Copy Prisma schema
 COPY prisma ./prisma
 
-# Copy generated Prisma client from builder
-COPY --from=builder /app/src/generated ./dist/generated
-
-# Copy Prisma schema (runtime)
-COPY prisma ./prisma
-
 # Copy public assets
 COPY public ./public
+
+# Copy built application from builder
+COPY --from=builder /app/dist ./dist
 
 # Copy and set permissions for entrypoint script
 COPY scripts/docker-entrypoint.sh /app/docker-entrypoint.sh

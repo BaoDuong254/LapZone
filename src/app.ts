@@ -1,5 +1,4 @@
 import express from "express";
-import "dotenv/config";
 import webRoutes from "routes/web";
 import initDatabase from "config/seed";
 import passport from "passport";
